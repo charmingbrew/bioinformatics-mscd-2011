@@ -8,6 +8,8 @@
  *  @date   17. April 2011
  */
 
+#include <iostream>
+
  /**
   *  Default constructor
   *
