@@ -69,9 +69,9 @@ class Writer
          *  @param Path
          *  @param alignment A pointer to the aligned genotypes
          */
-        static void Write(string Path, Alignment *alignment)
+        static void Write(string *Path, Alignment *alignment)
         {
-            SeqWrite(Path, alignment);
+            AlignWrite(Path, alignment);
         }
 
         /**
@@ -79,9 +79,9 @@ class Writer
          *  @param Path
          *  @param sequence A pointer to the sequence of the genotypes
          */
-        static void Write(string Path, Sequence *sequence)
+        static void Write(string *Path, Sequence *sequence)
         {
-
+            SeqWrite(Path, sequence);
         }
 
         /**
