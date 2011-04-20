@@ -1,11 +1,6 @@
-/*
- *  Sequence.h
- *
- *
- *  Created by Jonathan Nicholson on 4/18/11.
- *  Copyright 2011 __MyCompanyName__. All rights reserved.
- *
- */
+#ifndef _SEQUENCE_H
+#define _SEQUENCE_H
+
 #include <string>
 
 using std::string;
@@ -22,3 +17,5 @@ class Sequence {
 		void SetName(string name);
 		string GetName();
 };
+
+#endif /* _SEQUENCE_H */
