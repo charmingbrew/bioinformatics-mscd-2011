@@ -7,7 +7,8 @@ using namespace std;
 class Parser
 {
 	public:
-		static void ParseNPrint(string Path);
+		void ParseNPrint(char * Path);
+//		Sequence* ParseToSequence(char * Path);
 };
 
 #endif
