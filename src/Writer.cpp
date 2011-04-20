@@ -25,31 +25,34 @@ Writer::Writer()
 }
 
 /**
- *  a private static method for writing the aligned Fasta files to a file
+ *  a private static method that takes in a pointer to the alignment object
+ *  and writes the alignment to a file.
  *  @param File A pointer to the deisired file name
- *  @return alignment The aligned genotypes
+ *  @param alignment A pointer to the aligned genotypes
  */
-static void Writer::AlignWrite(std::string *File, Alignment alignment)
+static void Writer::AlignWrite(std::string *File, Alignment *alignment)
 {
 
 }
 
 /**
- *  a private static method for writing the Sequences from a genotype to a file
+ *  a private static method that takes in a pointer to the sequence object
+ *  and writes the sequence to a file.
  *  @param File A pointer to the desired file name
- *  @return sequence The sequence of the genotype
+ *  @param sequence A pointer to the sequence of the genotypes
  */
-static void Writer::SeqWrite(std::string *File, Sequence sequence)
+static void Writer::SeqWrite(std::string *File, Sequence *sequence)
 {
 
 }
 
 /**
- *  a private static method for writing the results of the Alignmed genotypes to a file
+ *  a private static method that takes in a pointer to the result object
+ *  and writes the result to a file.
  *  @param File A pointer to the desired file name
- *  @return result The result from the aligned genotype
+ *  @param result A pointer to the result from the aligned genotypes
  */
-static void Writer::AlignWrite(std::string *File, Result result)
+static void Writer::AlignWrite(std::string *File, Result *result)
 {
 
 }
@@ -57,19 +60,29 @@ static void Writer::AlignWrite(std::string *File, Result result)
 /**
  *  a public static method that calls the private method AlignWrite
  *  @param Path
- *
+ *  @param alignment A pointer to the aligned genotypes
  */
-static void Writer::Write(std::string Path, Alignment alignment)
+static void Writer::Write(std::string Path, Alignment *alignment)
 {
 
 }
 
-static void Writer::Write(std::string Path, Sequence sequence)
+/**
+ *  a public static method that calls the private method SeqWrite
+ *  @param Path
+ *  @param sequence A pointer to the sequence of the genotypes
+ */
+static void Writer::Write(std::string Path, Sequence *sequence)
 {
 
 }
 
-static void Writer::Write(std::string Path, Result result)
+/**
+ *  a public static method that calls the private method AlignWrite that writes the results
+ *  @param Path
+ *  @param result A pointer to the result of the aligned genotypes
+ */
+static void Writer::Write(std::string Path, Result *result)
 {
 
 }
