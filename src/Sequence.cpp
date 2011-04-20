@@ -62,7 +62,6 @@ int main () {
 	char hello [101];
 	cout << "Please enter the filepath: ";
 	std::cin.getline(hello, 101);
-	Parser * P = new Parser();
-	P->ParseNPrint(hello);
+	Parser::ParseNPrint(hello);
 	return 0;
 }
