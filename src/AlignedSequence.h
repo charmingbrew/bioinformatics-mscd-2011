@@ -2,6 +2,8 @@
 #define _ALIGNEDSEQUENCE_H
 
 #include <string>
+#include "Sequence.h"
+using namespace std;
 
 class AlignedSequence : public Sequence {
     private:
