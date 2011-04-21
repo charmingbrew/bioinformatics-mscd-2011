@@ -6,7 +6,11 @@ using namespace std;
 
 class Scoring
 {
+    private:
+        int scoreMatrix [4][4];
+        int GetMatrixValue(char ACGT);
     public:
+        Scoring();
         int Score (string a, string b);
 };
 
