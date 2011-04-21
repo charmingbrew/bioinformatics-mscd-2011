@@ -51,6 +51,15 @@ string Sequence::GetName()
     return name;
 }
 
+void Sequence::SetFilename(string filename_in)
+{
+    filename = filename_in;
+}
+
+string Sequence::GetFilename()
+{
+    return filename;
+}
 
 /**
  *  @brief Testing Method
@@ -58,10 +67,3 @@ string Sequence::GetName()
  *  classes work together well.
  *  TODO: Allow to parse through multiple Sequences
  */
-int main () {
-	char hello [101];
-	cout << "Please enter the filepath: ";
-	std::cin.getline(hello, 101);
-	Parser::ParseNPrint(hello);
-	return 0;
-}

@@ -51,7 +51,7 @@ int Scoring::GetMatrixValue(char ACGT)
     else if (ACGT == 'G') return 2;
     else if (ACGT == 'T') return 3;
 }
-
+/*
 int main ()
 {
     cout << "Testing a simple score for two strings" << endl;
@@ -60,3 +60,4 @@ int main ()
     score = s->Score("ATTGAAGAGT", "AGCAGTGGGG");
     cout << score << endl;
 }
+*/

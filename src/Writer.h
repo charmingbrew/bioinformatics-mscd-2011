@@ -4,6 +4,7 @@
 #include <string>
 #include "Alignment.h"
 #include "Sequence.h"
+#include <cstdio>
 
 
 class Writer
