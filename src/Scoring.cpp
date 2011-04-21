@@ -7,12 +7,13 @@
 
 using namespace std;
 
-Scoring::Scoring()
+Scoring::Scoring(int match, int miss)
 {
-    scoreMatrix = { {2, -1, -1, -1},
-                    {-1, 2, -1, -1},
-                    {-1, -1, 2, -1},
-                    {-1, -1, -1, 2} };
+    for (int i = 0; i < 4; i++) {
+        for(int j = 0; j < 4; j++ )
+            if(i == j) scoreMatrix[i][j] = match;
+            else scoreMatrix[i][j] = miss;
+    }
 }
 
 /**
@@ -55,7 +56,7 @@ int main ()
 {
     cout << "Testing a simple score for two strings" << endl;
     int score;
-    Scoring *s = new Scoring();
+    Scoring *s = new Scoring(2, -1);
     score = s->Score("ATTGAAGAGT", "AGCAGTGGGG");
     cout << score << endl;
 }
