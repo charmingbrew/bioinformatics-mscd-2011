@@ -1,4 +1,4 @@
-/*
+/**
  *  @file Sequence.cpp
  *
  */

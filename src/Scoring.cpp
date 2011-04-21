@@ -7,16 +7,18 @@
 
 using namespace std;
 
+/**
+ * Constructor that allows different scores for score matrix.
+ *
+ */
 Scoring::Scoring(int match, int miss)
 {
-<<<<<<< .mine
-=======
     for (int i = 0; i < 4; i++) {
-        for(int j = 0; j < 4; j++ )
+        for(int j = 0; j < 4; j++ ) {
             if(i == j) scoreMatrix[i][j] = match;
             else scoreMatrix[i][j] = miss;
+        }
     }
->>>>>>> .r23
 }
 
 /**
@@ -26,13 +28,9 @@ Scoring::Scoring(int match, int miss)
  * TODO: Reimplement for chars only so the Alignment class can
  *      use to create pairs.
  */
-int Scoring::Score(string A, string B)
+int Scoring::Score(char A, char B)
 {
-    int score = 0;
-    for (int i = 0; i < A.length(); i++) {
-        score += scoreMatrix[GetMatrixValue(A[i])] [GetMatrixValue(B[i])];
-    }
-    return score;
+    return scoreMatrix[GetMatrixValue(A)][GetMatrixValue(B)];
 }
 
 /**
@@ -54,13 +52,3 @@ int Scoring::GetMatrixValue(char ACGT)
     else if (ACGT == 'G') return 2;
     else if (ACGT == 'T') return 3;
 }
-/*
-int main ()
-{
-    cout << "Testing a simple score for two strings" << endl;
-    int score;
-    Scoring *s = new Scoring(2, -1);
-    score = s->Score("ATTGAAGAGT", "AGCAGTGGGG");
-    cout << score << endl;
-}
-*/
