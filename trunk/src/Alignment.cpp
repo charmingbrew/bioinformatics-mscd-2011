@@ -22,10 +22,10 @@ using namespace std;
 
 int Alignment::CreateMatrix(string A, string B)
 {
-
+    return 0;
 }
 
 int Alignment::Align(string A, string B)
 {
-
+    return 0;
 }

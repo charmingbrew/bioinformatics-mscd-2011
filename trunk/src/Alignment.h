@@ -27,6 +27,8 @@ class Alignment
 
 		string ToString(void);
 		void RunAlignment(ALIGN_METHOD method);
+		int CreateMatrix(string A, string B);
+		int Align(string A, string B);
 };
 
 #endif /* _ALIGNMENT_H */

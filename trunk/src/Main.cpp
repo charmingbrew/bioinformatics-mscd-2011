@@ -9,6 +9,7 @@ int main(void)
     std::cin >> path;
 
     Parser::ParseNPrint(path);
+    Parser::ParseToSequence(path);
 
     return 0;
 

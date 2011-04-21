@@ -28,9 +28,9 @@ Scoring::Scoring(int match, int miss)
  * TODO: Reimplement for chars only so the Alignment class can
  *      use to create pairs.
  */
-int Scoring::Score(char A, char B)
+int Scoring::Score(char a, char b)
 {
-    return scoreMatrix[GetMatrixValue(A)][GetMatrixValue(B)];
+    return scoreMatrix[GetMatrixValue(a)][GetMatrixValue(b)];
 }
 
 /**
