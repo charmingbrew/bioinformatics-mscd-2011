@@ -28,8 +28,8 @@ Sequence::Sequence()
  */
 Sequence::Sequence(string name, string genome)
 {
-    this->SetName(name);
-    this->SetSequence(genome);
+    SetName(name);
+    SetSequence(genome);
 }
 
 void Sequence::SetSequence(string genome)
@@ -43,7 +43,7 @@ string Sequence::GetSequence() {
 
 void Sequence::SetName(string name)
 {
-    name = name;
+    this->name = name;
 }
 
 string Sequence::GetName()
