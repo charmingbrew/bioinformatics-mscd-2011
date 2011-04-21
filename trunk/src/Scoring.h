@@ -7,7 +7,10 @@ using namespace std;
 class Scoring
 {
     private:
-        int scoreMatrix [4][4];
+		static int scoreMatrix[4][4] = {2, -1, -1, -1,
+										-1, 2, -1, -1, 
+										-1, -1, 2, -1,
+										-1, -1, -1, 2 };
         int GetMatrixValue(char ACGT);
     public:
         Scoring(int match, int miss);
