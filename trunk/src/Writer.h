@@ -2,6 +2,8 @@
 #define _WRITER_H
 
 #include <string>
+#include <fstream>
+#include <iostream>
 #include "Alignment.h"
 #include "Sequence.h"
 
@@ -15,15 +17,9 @@ class Writer
         *  @param File A pointer to the deisired file name
         *  @param alignment A pointer to the aligned genotypes
         */
-        static void AlignWrite(string *File, Alignment *alignment)
+        static void FileWrite(Alignment alignment)
         {
-            FILE *pFile;
-            FILE *aFile;
-            pFile = fopen("something.fasta", "wb");
-            aFile = fopen("alignment.txt", "wb");
-            fwrite(alignment, 1, sizeof(alignment), aFile);
-            fclose(pFile);
-            fclose(aFile);
+
         }
 
          /**
@@ -32,15 +28,12 @@ class Writer
          *  @param File A pointer to the desired file name
          *  @param sequence A pointer to the sequence of the genotypes
          */
-        static void SeqWrite(string *File, Sequence *sequence)
+        static void FileWrite(Sequence sequence)
         {
-            FILE *pFile;
-            FILE *sFile;
-            pFile = fopen("something.fasta", "wb");
-            sFile = fopen("sequence.txt", "wb");
-            fwrite(sequence, 1, sizeof(sequence), sFile);
-            fclose(pFile);
-            fclose(sFile);
+            ofstream toaster;
+            toaster.open ("m9848OUTPUT.txt");
+            toaster << sequence.GetSequence();
+            toaster.close();
         }
 
         /**
@@ -68,9 +61,9 @@ class Writer
          *  @param Path
          *  @param alignment A pointer to the aligned genotypes
          */
-        static void Write(string *Path, Alignment *alignment)
+        static void Write(Alignment alignment)
         {
-            AlignWrite(Path, alignment);
+            FileWrite(alignment);
         }
 
         /**
@@ -78,9 +71,9 @@ class Writer
          *  @param Path
          *  @param sequence A pointer to the sequence of the genotypes
          */
-        static void Write(string *Path, Sequence *sequence)
+        static void Write(Sequence sequence)
         {
-            SeqWrite(Path, sequence);
+            FileWrite(sequence);
         }
 
         /**

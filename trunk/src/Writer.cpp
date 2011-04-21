@@ -16,3 +16,14 @@
 #include <string>
 
 using namespace std;
+
+int main (void)
+{
+    string a = "spatula farm";
+    string b = "penguine shoes";
+
+    Sequence *whale = new Sequence(a, b);
+
+    cout << whale->GetName() << endl;
+    return 0;
+};

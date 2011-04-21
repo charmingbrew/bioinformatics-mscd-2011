@@ -3,8 +3,6 @@
 
 #include <string>
 
-using std::string;
-
 class Sequence {
 	private:
         string filename;

@@ -1,6 +1,7 @@
 #ifndef _ALIGNMENT_H
 #define _ALIGNMENT_H
 
+#include "AlignedSequence.h"
 #include <string>
 using namespace std;
 

@@ -26,13 +26,13 @@ Sequence::Sequence()
  *  @param Name The name of the Genotype Sequence
  *  @param Genome The Sequence of the genotype itself
  */
-Sequence::Sequence(string Name, string Genome)
+Sequence::Sequence(string name, string genome)
 {
-    SetName(Name);
-    SetSequence(Genome);
+    this.SetName(Name);
+    this.SetSequence(genome);
 }
 
-void Sequence::SetSequence(string Genome)
+void Sequence::SetSequence(string genome)
 {
     genotype = Genome;
 }

@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Parser.h"
-
+/**
 int main(void)
 {
     char path[256];
@@ -11,4 +11,7 @@ int main(void)
     Parser::ParseNPrint(path);
 
     return 0;
+
+
 }
+*/
