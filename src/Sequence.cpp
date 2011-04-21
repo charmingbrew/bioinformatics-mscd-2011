@@ -28,22 +28,22 @@ Sequence::Sequence()
  */
 Sequence::Sequence(string name, string genome)
 {
-    this.SetName(Name);
-    this.SetSequence(genome);
+    this->SetName(name);
+    this->SetSequence(genome);
 }
 
 void Sequence::SetSequence(string genome)
 {
-    genotype = Genome;
+    genotype = genome;
 }
 
 string Sequence::GetSequence() {
 	return genotype;
 }
 
-void Sequence::SetName(string Name)
+void Sequence::SetName(string name)
 {
-    name = Name;
+    name = name;
 }
 
 string Sequence::GetName()

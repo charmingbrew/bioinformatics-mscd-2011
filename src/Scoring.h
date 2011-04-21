@@ -7,11 +7,11 @@ using namespace std;
 class Scoring
 {
     private:
-		static int scoreMatrix[4][4];
-        int GetMatrixValue(char ACGT);
+		int scoreMatrix[4][4];
     public:
         Scoring(int match, int miss);
-        int Score (string a, string b);
+        int Score (char a, char b);
+        int GetMatrixValue(char ACGT);
 };
 
 #endif /* _SCORING_H */
