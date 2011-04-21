@@ -9,11 +9,14 @@ using namespace std;
 
 Scoring::Scoring(int match, int miss)
 {
+<<<<<<< .mine
+=======
     for (int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++ )
             if(i == j) scoreMatrix[i][j] = match;
             else scoreMatrix[i][j] = miss;
     }
+>>>>>>> .r23
 }
 
 /**
