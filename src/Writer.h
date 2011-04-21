@@ -5,12 +5,6 @@
 #include "Alignment.h"
 #include "Sequence.h"
 
-
-class Writer
-{
-#include <cstdio>
-
-
 class Writer
 {
     private:
