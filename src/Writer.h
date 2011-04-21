@@ -4,18 +4,15 @@
 #include <string>
 #include "Alignment.h"
 #include "Sequence.h"
-<<<<<<< .mine
 
 
 class Writer
 {
-=======
 #include <cstdio>
 
 
 class Writer
 {
->>>>>>> .r23
     private:
 
        /**
