@@ -7,6 +7,7 @@ using std::string;
 
 class Sequence {
 	private:
+        string filename;
         string name;
 		string genotype;
 	public:
@@ -16,6 +17,8 @@ class Sequence {
 		string GetSequence();
 		void SetName(string name);
 		string GetName();
+		void SetFilename(string filename_in);
+		string GetFilename();
 };
 
 #endif /* _SEQUENCE_H */
