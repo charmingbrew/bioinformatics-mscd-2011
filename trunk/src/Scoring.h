@@ -10,7 +10,7 @@ class Scoring
         int scoreMatrix [4][4];
         int GetMatrixValue(char ACGT);
     public:
-        Scoring();
+        Scoring(int match, int miss);
         int Score (string a, string b);
 };
 
