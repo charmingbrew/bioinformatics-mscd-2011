@@ -20,7 +20,7 @@ using namespace std;
 int main (void)
 {
     string a = "spatula farm";
-    string b = "penguine shoes";
+    string b = "penguin shoes";
 
     Sequence *whale = new Sequence(a, b);
 
