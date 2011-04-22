@@ -31,8 +31,9 @@ class Writer
         static void FileWrite(Sequence sequence)
         {
             ofstream toaster;
-            toaster.open ("m9848_OUTPUT.txt");
-            toaster << sequence.GetSequence();
+            toaster.open ((sequence.GetFilename()+=".txt").c_str());
+            toaster << sequence.GetName() << endl;
+            toaster << sequence.GetSequence() << endl;
             toaster.close();
         }
 
