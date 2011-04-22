@@ -9,7 +9,7 @@
 
 class Writer
 {
-    private:
+    public:
 
        /**
         *  a private static method that takes in a pointer to the alignment object
@@ -31,7 +31,7 @@ class Writer
         static void FileWrite(Sequence sequence)
         {
             ofstream toaster;
-            toaster.open ("m9848OUTPUT.txt");
+            toaster.open ("m9848_OUTPUT.txt");
             toaster << sequence.GetSequence();
             toaster.close();
         }
@@ -55,38 +55,6 @@ class Writer
             fclose(rFile);
         }
         */
-    public:
-        /**
-         *  a public static method that calls the private method AlignWrite
-         *  @param Path
-         *  @param alignment A pointer to the aligned genotypes
-         */
-        static void Write(Alignment alignment)
-        {
-            FileWrite(alignment);
-        }
-
-        /**
-         *  a public static method that calls the private method SeqWrite
-         *  @param Path
-         *  @param sequence A pointer to the sequence of the genotypes
-         */
-        static void Write(Sequence sequence)
-        {
-            FileWrite(sequence);
-        }
-
-        /**
-         *  a public static method that calls the private method AlignWrite that writes the results
-         *  @param Path
-         *  @param result A pointer to the result of the aligned genotypes
-         */
-         /**
-        static void Writer::Write(string Path, Result *result)
-        {
-            cout<<"Import Skynett" << endl;
-        }
-*/
 };
 
 #endif // _WRITER_H
