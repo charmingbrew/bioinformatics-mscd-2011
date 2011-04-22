@@ -9,10 +9,31 @@
 
 class Writer
 {
+    private:
+        /**
+         * @brief Formats sequences in output files
+         * Formats the one line string stored in a sequence's genotype
+         * for better results when printing to a file.
+         * @param gene A sequence's genotype
+         */
+         static string GeneFormat(string gene)
+         {
+             int temp = gene.length() / 70;
+             int i;
+
+             /* compensate for the characters that will be added by formatting */
+             temp = (gene.length() + temp) / 70;
+
+             for(i = 1; i <= temp; i++) {
+                 gene.insert(i * 70 - 1, 1, '\n');
+             }
+
+             return gene;
+         }
     public:
 
        /**
-        *  a private static method that takes in a pointer to the alignment object
+        *  A public static method that takes in a pointer to the alignment object
         *  and writes the alignment to a file.
         *  @param File A pointer to the deisired file name
         *  @param alignment A pointer to the aligned genotypes
@@ -23,22 +44,21 @@ class Writer
         }
 
          /**
-         *  a private static method that takes in a pointer to the sequence object
+         *  A public static method that takes in a pointer to the sequence object
          *  and writes the sequence to a file.
-         *  @param File A pointer to the desired file name
-         *  @param sequence A pointer to the sequence of the genotypes
+         *  @param sequence A pointer to a sequence
          */
         static void FileWrite(Sequence sequence)
         {
             ofstream toaster;
             toaster.open ((sequence.GetFilename()+=".txt").c_str());
             toaster << sequence.GetName() << endl;
-            toaster << sequence.GetSequence() << endl;
+            toaster << GeneFormat(sequence.GetSequence()) << endl;
             toaster.close();
         }
 
         /**
-         *  a private static method that takes in a pointer to the result object
+         *  A public static method that takes in a pointer to the result object
          *  and writes the result to a file.
          *  @param File A pointer to the desired file name
          *  @param result A pointer to the result from the aligned genotypes
