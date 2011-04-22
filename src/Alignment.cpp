@@ -1,7 +1,7 @@
 /**
  *  @file   Alignment.cpp
  *  @brief  A class for aligning Sequences
- *          Class creates a Matrix based on a the
+ *          Class creates a Matrix based on the
  *          Scoring class and find the most absolute
  *          path through that Matrix to create the best
  *          match possible.
