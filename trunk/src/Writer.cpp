@@ -16,7 +16,7 @@
 #include <string>
 
 using namespace std;
-
+/*
 int main (void)
 {
     string a = "spatula farm";
@@ -30,3 +30,4 @@ int main (void)
 
     return 0;
 };
+*/

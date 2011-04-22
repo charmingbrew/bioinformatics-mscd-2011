@@ -27,6 +27,11 @@ class Parser
             delete s;
         }
 
+        static void PrintFromSequence(Sequence seq)
+        {
+            cout << seq.GetName() << endl << seq.GetSequence() << endl;
+        }
+
         static Sequence * ParseToSequence(char * Path)
         {
             string name, temp, genome;
