@@ -16,20 +16,20 @@ class Writer
          * for better results when printing to a file.
          * @param gene A sequence's genotype
          */
-         static string GeneFormat(string gene)
-         {
-             int temp = gene.length() / 70;
-             int i;
+        static string GeneFormat(string gene)
+        {
+            int temp = gene.length() / 70;
+            int i;
 
-             /* compensate for the characters that will be added by formatting */
-             temp = (gene.length() + temp) / 70;
+            /* compensate for the characters that will be added by formatting */
+            temp = (gene.length() + temp) / 70;
 
-             for(i = 1; i <= temp; i++) {
-                 gene.insert(i * 70 - 1, 1, '\n');
-             }
+            for(i = 1; i <= temp; i++) {
+                gene.insert(i * 70 - 1, 1, '\n');
+            }
 
-             return gene;
-         }
+            return gene;
+        }
     public:
 
        /**

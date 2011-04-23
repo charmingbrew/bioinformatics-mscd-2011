@@ -11,6 +11,7 @@ class Sequence {
         string name;
 		string genotype;
 	public:
+        Sequence(string name, string genome, string filename);
         Sequence(string name, string genome);
         Sequence();
 		void SetSequence(string genome);

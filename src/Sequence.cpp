@@ -32,6 +32,19 @@ Sequence::Sequence(string name, string genome)
     SetSequence(genome);
 }
 
+/**
+ *  Constructor that initializes all three fields.
+ *  @param name The name of the sequence
+ *  @param genome The sequence of the genotype itself
+ *  @param filename The output file name
+ */
+Sequence::Sequence(string name, string genome, string file_in)
+{
+    SetName(name);
+    SetSequence(genome);
+    SetFilename(file_in);
+}
+
 void Sequence::SetSequence(string genome)
 {
     genotype = genome;
