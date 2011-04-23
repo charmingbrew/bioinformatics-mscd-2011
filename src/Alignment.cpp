@@ -24,6 +24,12 @@ using namespace std;
 
 #define debug
 
+Alignment::Alignment(Sequence A, Sequence B)
+{
+	this->SeqA = A;
+	this->SeqB = B;
+}
+
 /**
  *  Compares the three integers and returns the largest.
  *  @param match A direct match up with a letter.
@@ -48,8 +54,11 @@ int MaxScore(int match, int deleted, int insert)
  *  Beginning stub for the alignment method.
  *  @todo Matches up Alignments into AlignedSequence A and B
  */
-void Align(string A, string B)
+void Alignment::NWAlign()
 {
+	string A = SeqA.GetSequence();
+	string B = SeqB.GetSequence();
+
 	Scoring *scoring = new Scoring();
 	int penalty = -5;
 	vector< vector<int> > AlignmentMatrix;
@@ -70,12 +79,12 @@ void Align(string A, string B)
     }
 
 	#ifdef debug
-    /*for(int k = 0; k < A.length(); k++) {
+    for(int k = 0; k < A.length(); k++) {
         for (int l = 0; l < B.length(); l++) {
             cout << AlignmentMatrix[k][l] << " ";
         }
         cout << endl;
-    }*/
+    }
 	#endif
     
     string alignment_a = "";
@@ -103,13 +112,11 @@ void Align(string A, string B)
         }
     }
     while (i > 0) {
-        cout << "I: " << i << " J: " << j << endl;
 		alignment_a = A[i] + alignment_a;
         alignment_b = "-" + alignment_b;
         i--;
     }
     while (j > 0) {
-		cout << "I: " << i << " J: " << j << endl;
         alignment_a = "-" + alignment_a;
         alignment_b = B[j] + alignment_b;
         j--;
@@ -123,10 +130,15 @@ void Align(string A, string B)
 	#ifdef debug
     cout << alignment_a << endl << alignment_b <<endl;
 	#endif
+
+	SeqA.GetAlignedSequence().SetAlignedGenotype(alignment_a);
+	SeqB.GetAlignedSequence().SetAlignedGenotype(alignment_b);
+
+	this->isAligned = true;
 }
 
 int main () {
-    Align("GAAGTATACCTATGGGACCTAGG", "TATAAGACAAGCACAT");
-	Align("CTAGCAGAAGAAGAAGTAGTAATCAGATCTGAAAATTTCACGAATAATGCTAAAATCATAATAGTACACCTGAATAAAACTGTAAATATTACTTGTACAAGACCCAACAACAATACAAGAAGAAGTATACCTATGGGACC", "CTAGCAGAAGGAGAGGTAATAATTAGATCTGAAAATTTCACGGATAATGCTAAGACCATAATAGTACAGCTGAATGCAACTATAAACATTATTTGTGAAAGACCCCACAACAATACAAGAAAAAGTATACATATAGGACC");
+	Alignment a = Alignment(Sequence("HIVA", "CTAGCAGAAGAAGAAGTAGTAATCAGATCTGAAAATTTCACGAATAATGCTAAAATCATAATAGTACACCTGAATAAAACTGTAAATATTACTTGTACAAGACCCAACAACAATACAAGAAGAAGTATACCTATGGGACC"), Sequence("HIVB", "CTAGCAGAAGGAGAGGTAATAATTAGATCTGAAAATTTCACGGATAATGCTAAGACCATAATAGTACAGCTGAATGCAACTATAAACATTATTTGTGAAAGACCCCACAACAATACAAGAAAAAGTATACATATAGGACC"));
+	a.NWAlign();
     return 0;
 }

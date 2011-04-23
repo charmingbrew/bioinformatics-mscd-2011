@@ -9,14 +9,13 @@ using namespace std;
 class Alignment
 {
 	private:
-		//AlignedSequence AlignedSeqA;
-		//AlignedSequence AlignedSeqB;
+		Sequence SeqA;
+		Sequence SeqB;
 		bool isAligned;
-        
-		void NWAlign(Sequence A, Sequence B);
 	public:
 		string ToString(void);
 		Alignment(Sequence A, Sequence B);
+		void NWAlign();
 		
 };
 

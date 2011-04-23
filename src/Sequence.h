@@ -13,6 +13,7 @@ class Sequence {
 		string genotype;
 		AlignedSequence aligned_sequence;
 	public:
+		Sequence();
         Sequence(string name, string genotype);
 		Sequence(string name, string genotype, string file_path);
 
@@ -24,6 +25,8 @@ class Sequence {
 
 		void SetFilePath(string file_path);
 		string GetFilePath();
+
+		AlignedSequence &GetAlignedSequence();
 };
 
 #endif /* _SEQUENCE_H */
