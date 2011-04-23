@@ -2,6 +2,7 @@
 #define _ALIGNMENT_H
 
 #include "AlignedSequence.h"
+#include <vector>
 #include <string>
 using namespace std;
 
@@ -14,20 +15,17 @@ enum ALIGN_METHOD
 class Alignment
 {
 	private:
-		AlignedSequence A;
-		AlignedSequence B;
+		AlignedSequence alignSeqA;
+		AlignedSequence alineSeqB;
 		bool isAligned;
-
+        vector< vector<int> > AlignmentMatrix;
 		void NWAlign(AlignedSequence A, AlignedSequence B);
 		void PWAlign(AlignedSequence A, AlignedSequence B);
 	public:
-		Alignment(Sequence A, Sequence B);
-		Alignment(void);
-		~Alignment(void);
-
 		string ToString(void);
 		void RunAlignment(ALIGN_METHOD method);
-		int CreateMatrix(string A, string B);
+		void CreateMatrix(string A, string B);
+		int MaxScore(int match, int deleted, int insert);
 		int Align(string A, string B);
 };
 
