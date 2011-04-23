@@ -1,6 +1,7 @@
 #ifndef _SEQUENCE_H
 #define _SEQUENCE_H
 
+#include "AlignedSequence.h"
 #include <string>
 
 using std::string;
@@ -10,7 +11,7 @@ class Sequence {
         string file_path;
         string name;
 		string genotype;
-		//AlignedSequence alignment;
+		AlignedSequence aligned_sequence;
 	public:
         Sequence(string name, string genotype);
 		Sequence(string name, string genotype, string file_path);
