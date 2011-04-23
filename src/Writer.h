@@ -51,7 +51,7 @@ class Writer
         static void FileWrite(Sequence sequence)
         {
             ofstream toaster;
-            toaster.open ((sequence.GetFilename()+=".txt").c_str());
+            toaster.open ((sequence.GetFilePath()+=".txt").c_str());
             toaster << sequence.GetName() << endl;
             toaster << GeneFormat(sequence.GetSequence()) << endl;
             toaster.close();

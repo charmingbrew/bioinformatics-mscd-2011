@@ -7,19 +7,22 @@ using std::string;
 
 class Sequence {
 	private:
-        string filename;
+        string file_path;
         string name;
 		string genotype;
+		//AlignedSequence alignment;
 	public:
-        Sequence(string name, string genome, string filename);
-        Sequence(string name, string genome);
-        Sequence();
-		void SetSequence(string genome);
+        Sequence(string name, string genotype);
+		Sequence(string name, string genotype, string file_path);
+
+		void SetSequence(string genotype);
 		string GetSequence();
+
 		void SetName(string name);
 		string GetName();
-		void SetFilename(string filename_in);
-		string GetFilename();
+
+		void SetFilePath(string file_path);
+		string GetFilePath();
 };
 
 #endif /* _SEQUENCE_H */
