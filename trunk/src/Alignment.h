@@ -1,16 +1,10 @@
 #ifndef _ALIGNMENT_H
 #define _ALIGNMENT_H
 
-//#include "AlignedSequence.h"
+#include "Sequence.h"
 #include <vector>
 #include <string>
 using namespace std;
-
-enum ALIGN_METHOD
-{
-	NWUNSCH,
-	PAIRWISE
-};
 
 class Alignment
 {
@@ -19,11 +13,10 @@ class Alignment
 		//AlignedSequence AlignedSeqB;
 		bool isAligned;
         
-		//void NWAlign(AlignedSequence A, AlignedSequence B);
-		//void PWAlign(AlignedSequence A, AlignedSequence B);
+		void NWAlign(Sequence A, Sequence B);
 	public:
 		string ToString(void);
-		void RunAlignment(ALIGN_METHOD method);
+		Alignment(Sequence A, Sequence B);
 		
 };
 

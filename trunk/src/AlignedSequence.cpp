@@ -1,11 +1,11 @@
 #include "AlignedSequence.h"
 
-void AlignedSequence::SetAlignedGenotype(string gene_in)
+void AlignedSequence::SetAlignedGenotype(string aligned_genotype)
 {
-    alignedgenotype = gene_in;
+    this->aligned_genotype = aligned_genotype;
 }
 
 string AlignedSequence::GetAlignedGenotype()
 {
-    return alignedgenotype;
+    return aligned_genotype;
 }
