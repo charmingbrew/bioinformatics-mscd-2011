@@ -34,16 +34,17 @@ class Parser
 
         static Sequence * ParseToSequence(char * Path)
         {
-            string name, temp, genome;
+            string name, temp, filename, genome;
             std::ifstream file (Path);
             if (file.is_open()) {
                 if(file.good()) getline(file, name);
-                    while (file.good()) {
-                        getline(file, temp);
-                        genome += temp;
-                    }
+                filename = name.substr(name.find("gb|") + 3, 6);
+                while (file.good()) {
+                    getline(file, temp);
+                    genome += temp;
+                }
             }
-            return new Sequence(name, genome);
+            return new Sequence(name, genome, filename);
         }
 };
 

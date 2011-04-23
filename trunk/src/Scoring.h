@@ -10,8 +10,11 @@ class Scoring
 		int scoreMatrix[4][4];
     public:
         Scoring(int match, int miss);
+        Scoring();
         int Score (char a, char b);
         int GetMatrixValue(char ACGT);
+        void PrintMatrix();
+        int ScoreStrings(string a, string b);
 };
 
 #endif /* _SCORING_H */
