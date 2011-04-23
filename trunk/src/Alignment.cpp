@@ -80,6 +80,51 @@ int Alignment::MaxScore(int match, int deleted, int insert)
  */
 int Alignment::Align(string A, string B)
 {
+    //TODO: SUBCLASS SCORE AND PUT PENALTY IN THE CONSTRUCTOR
+    Scoring *s = new Scoring(2,-1);
+    int penalty = -2;
     CreateMatrix(A, B);
+    string alignment_a = "";
+    string alignment_b = "";
+    int i = A.length()-1;
+    int j = B.length()-1;
+    while (i > 0 && j > 0) {
+        int score = AlignmentMatrix[i][j];
+        int score_diag = AlignmentMatrix[i - 1][j - 1];
+        int score_up = AlignmentMatrix[i][j-1];
+        int score_left = AlignmentMatrix[i-1][j];
+        if (score == score_diag + s->Score(A[i], B[j])) {
+            alignment_a = A[i] + alignment_a;
+            alignment_b = B[j] + alignment_b;
+            --i;
+            --j;
+        } else if (score == score_left + penalty) {
+            alignment_a = A[i] + alignment_a;
+            alignment_b = "-" + alignment_b;
+            --i;
+        } else if (score == score_up + penalty) {
+            alignment_a = "-" + alignment_a;
+            alignment_b = B[j] + alignment_b;
+            --j;
+        }
+    }
+    while (i > 0) {
+        alignment_a = A[i] + alignment_a;
+        alignment_b = "-" + alignment_b;
+        --i;
+    }
+    while (j > 0) {
+        alignment_a = "-" + alignment_a;
+        alignment_b = B[j] + alignment_b;
+        --j;
+    }
+
+    cout << alignment_a << endl;
+    cout << alignment_b << endl;
+}
+
+int main () {
+    Alignment *A = new Alignment();
+    A->Align("GAAGTATACCTATGGGACCTAGG", "TATAAGACAAGCACAT");
     return 0;
 }

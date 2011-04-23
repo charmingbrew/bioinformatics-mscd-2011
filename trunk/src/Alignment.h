@@ -15,8 +15,8 @@ enum ALIGN_METHOD
 class Alignment
 {
 	private:
-		AlignedSequence alignSeqA;
-		AlignedSequence alineSeqB;
+		//AlignedSequence AlignedSeqA;
+		//AlignedSequence AlignedSeqB;
 		bool isAligned;
         vector< vector<int> > AlignmentMatrix;
 		void NWAlign(AlignedSequence A, AlignedSequence B);
