@@ -13,6 +13,10 @@
 using std::string;
 using std::cout;
 
+Sequence::Sequence()
+{
+}
+
 /**
  *  Constructor that allows both fields to be initialized.
  *  @param name The name of the Genotype Sequence
@@ -20,8 +24,8 @@ using std::cout;
  */
 Sequence::Sequence(string name, string genotype)
 {
-    SetName(name);
-    SetSequence(genotype);
+	this->name = name;
+	this->genotype = genotype;
 }
 
 /**
@@ -64,4 +68,9 @@ void Sequence::SetFilePath(string file_path)
 string Sequence::GetFilePath()
 {
     return file_path;
+}
+
+AlignedSequence &Sequence::GetAlignedSequence()
+{
+	return this->aligned_sequence;
 }

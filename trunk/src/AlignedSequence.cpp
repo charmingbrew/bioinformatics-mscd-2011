@@ -9,3 +9,13 @@ string AlignedSequence::GetAlignedGenotype()
 {
     return aligned_genotype;
 }
+
+void AlignedSequence::SetScore(int score)
+{
+	this->score = score;
+}
+
+int AlignedSequence::GetScore()
+{
+	return this->score;
+}

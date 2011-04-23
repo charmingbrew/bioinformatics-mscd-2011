@@ -11,6 +11,9 @@ class AlignedSequence {
     public:
         void SetAlignedGenotype(string aligned_genotype);
         string GetAlignedGenotype();
+
+		void SetScore(int score);
+		int GetScore();
 };
 
 #endif
