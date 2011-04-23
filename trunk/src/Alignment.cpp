@@ -22,37 +22,7 @@
 #include <iostream>
 using namespace std;
 
-/**
- *  Creates a matrix of all allignments that are
- *  possible and diagnalizes the best alignment in
- *  comparison of both strings.
- *  @todo REMOVE PRINTING.
- */
-void Alignment::CreateMatrix(string A, string B)
-{
-    int penalty = -2;
-    Scoring *score = new Scoring(2,-1);
-    AlignmentMatrix.resize(A.length(), vector<int>(B.length()) );
-    for (int a = 0; a < A.length(); a++)
-        AlignmentMatrix[a][0] = penalty * a;
-    for (int b = 0; b < B.length(); b++)
-        AlignmentMatrix[0][b] = penalty * b;
-    for (int i = 1; i < A.length(); i++) {
-        for (int j = 1; j < B.length(); j++) {
-            int match = AlignmentMatrix[i-1][j-1] + score->Score(A[i],B[j]);
-            int deleted = AlignmentMatrix[i-1][j] + penalty;
-            int insert = AlignmentMatrix[i][j-1] + penalty;
-            AlignmentMatrix[i][j] = MaxScore(match, deleted, insert);
-        }
-    }
-
-    for(int k = 0; k < A.length(); k++) {
-        for (int l = 0; l < B.length(); l++) {
-            cout << AlignmentMatrix[k][l] << " ";
-        }
-        cout << endl;
-    }
-}
+#define debug
 
 /**
  *  Compares the three integers and returns the largest.
@@ -61,7 +31,7 @@ void Alignment::CreateMatrix(string A, string B)
  *  @param insert Bottom string is aligned with a gap
  *  @return the higest score of the three in an alignment matrix.
  */
-int Alignment::MaxScore(int match, int deleted, int insert)
+int MaxScore(int match, int deleted, int insert)
 {
     if (match > deleted) {
         if (match > insert)
@@ -78,12 +48,36 @@ int Alignment::MaxScore(int match, int deleted, int insert)
  *  Beginning stub for the alignment method.
  *  @todo Matches up Alignments into AlignedSequence A and B
  */
-int Alignment::Align(string A, string B)
+void Align(string A, string B)
 {
-    //TODO: SUBCLASS SCORE AND PUT PENALTY IN THE CONSTRUCTOR
-    Scoring *s = new Scoring(2,-1);
-    int penalty = -2;
-    CreateMatrix(A, B);
+	Scoring *scoring = new Scoring();
+	int penalty = -5;
+	vector< vector<int> > AlignmentMatrix;
+
+	/* Create Needleman-Wunsch Alignment Matrix */
+    AlignmentMatrix.resize(A.length(), vector<int>(B.length()) );
+    for (int a = 0; a < A.length(); a++)
+        AlignmentMatrix[a][0] = penalty * a;
+    for (int b = 0; b < B.length(); b++)
+        AlignmentMatrix[0][b] = penalty * b;
+    for (int i = 1; i < A.length(); i++) {
+        for (int j = 1; j < B.length(); j++) {
+            int match = AlignmentMatrix[i-1][j-1] + scoring->Score(A[i],B[j]);
+            int deleted = AlignmentMatrix[i-1][j] + penalty;
+            int insert = AlignmentMatrix[i][j-1] + penalty;
+            AlignmentMatrix[i][j] = MaxScore(match, deleted, insert);
+        }
+    }
+
+	#ifdef debug
+    /*for(int k = 0; k < A.length(); k++) {
+        for (int l = 0; l < B.length(); l++) {
+            cout << AlignmentMatrix[k][l] << " ";
+        }
+        cout << endl;
+    }*/
+	#endif
+    
     string alignment_a = "";
     string alignment_b = "";
     int i = A.length()-1;
@@ -93,39 +87,46 @@ int Alignment::Align(string A, string B)
         int score_diag = AlignmentMatrix[i - 1][j - 1];
         int score_up = AlignmentMatrix[i][j-1];
         int score_left = AlignmentMatrix[i-1][j];
-        if (score == score_diag + s->Score(A[i], B[j])) {
+        if (score == score_diag + scoring->Score(A[i], B[j])) {
             alignment_a = A[i] + alignment_a;
             alignment_b = B[j] + alignment_b;
-            --i;
-            --j;
+            i--;
+            j--;
         } else if (score == score_left + penalty) {
             alignment_a = A[i] + alignment_a;
             alignment_b = "-" + alignment_b;
-            --i;
+            i--;
         } else if (score == score_up + penalty) {
             alignment_a = "-" + alignment_a;
             alignment_b = B[j] + alignment_b;
-            --j;
+            j--;
         }
     }
-    while (i >= 0) {
-        alignment_a = A[i] + alignment_a;
+    while (i > 0) {
+        cout << "I: " << i << " J: " << j << endl;
+		alignment_a = A[i] + alignment_a;
         alignment_b = "-" + alignment_b;
-        --i;
+        i--;
     }
-    while (j >= 0) {
+    while (j > 0) {
+		cout << "I: " << i << " J: " << j << endl;
         alignment_a = "-" + alignment_a;
         alignment_b = B[j] + alignment_b;
-        --j;
+        j--;
     }
+	if (i == 0 && j == 0)
+	{
+		alignment_a = A[0] + alignment_a;
+		alignment_b = B[0] + alignment_b;
+	}
 
-    cout << alignment_a << endl;
-    cout << alignment_b << endl;
-	return 0; //What should this method return?
+	#ifdef debug
+    cout << alignment_a << endl << alignment_b <<endl;
+	#endif
 }
 
 int main () {
-    Alignment *A = new Alignment();
-    A->Align("GAAGTATACCTATGGGACCTAGG", "TATAAGACAAGCACAT");
+    Align("GAAGTATACCTATGGGACCTAGG", "TATAAGACAAGCACAT");
+	Align("CTAGCAGAAGAAGAAGTAGTAATCAGATCTGAAAATTTCACGAATAATGCTAAAATCATAATAGTACACCTGAATAAAACTGTAAATATTACTTGTACAAGACCCAACAACAATACAAGAAGAAGTATACCTATGGGACC", "CTAGCAGAAGGAGAGGTAATAATTAGATCTGAAAATTTCACGGATAATGCTAAGACCATAATAGTACAGCTGAATGCAACTATAAACATTATTTGTGAAAGACCCCACAACAATACAAGAAAAAGTATACATATAGGACC");
     return 0;
 }

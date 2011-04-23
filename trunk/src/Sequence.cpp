@@ -4,50 +4,42 @@
  */
 #include <string>
 #include <iostream>
-#include <iomanip>
 #include <fstream>
 #include "Sequence.h"
 #include "Parser.h"
 #include "Alignment.h"
+#include "AlignedSequence.h"
 
 using std::string;
 using std::cout;
 
 /**
- * Default Constructor
- */
-Sequence::Sequence()
-{
-
-}
-
-/**
  *  Constructor that allows both fields to be initialized.
- *  @param Name The name of the Genotype Sequence
- *  @param Genome The Sequence of the genotype itself
+ *  @param name The name of the Genotype Sequence
+ *  @param genotype The Sequence of the genotype
  */
-Sequence::Sequence(string name, string genome)
+Sequence::Sequence(string name, string genotype)
 {
     SetName(name);
-    SetSequence(genome);
+    SetSequence(genotype);
 }
 
 /**
  *  Constructor that initializes all three fields.
  *  @param name The name of the sequence
- *  @param genome The sequence of the genotype itself
+ *  @param genotype The sequence of the genotype
  *  @param filename The output file name
  */
-Sequence::Sequence(string name, string genome, string file_in)
+Sequence::Sequence(string name, string genotype, string file_path)
 {
     SetName(name);
-    SetSequence(genome);
-    SetFilename(file_in);
+    SetSequence(genotype);
+    SetFilePath(file_path);
 }
 
-void Sequence::SetSequence(string genome)
+void Sequence::SetSequence(string genotype)
 {
-    genotype = genome;
+    this->genotype = genotype;
 }
 
 string Sequence::GetSequence() {
@@ -64,12 +56,12 @@ string Sequence::GetName()
     return name;
 }
 
-void Sequence::SetFilename(string filename_in)
+void Sequence::SetFilePath(string file_path)
 {
-    filename = filename_in;
+    this->file_path = file_path;
 }
 
-string Sequence::GetFilename()
+string Sequence::GetFilePath()
 {
-    return filename;
+    return file_path;
 }

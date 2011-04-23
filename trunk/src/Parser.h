@@ -19,7 +19,7 @@ class Parser
          *  TODO: Use Writer to write to screen.
          *  @param Path absolute or relative path to the FASTA file.
          */
-        static void ParseNPrint(char * Path)
+        static void ParseNPrint(char *Path)
         {
 
             Sequence *s = ParseToSequence(Path);
@@ -27,24 +27,24 @@ class Parser
             delete s;
         }
 
-        static void PrintFromSequence(Sequence seq)
+        static void PrintFromSequence(Sequence &seq)
         {
             cout << seq.GetName() << endl << seq.GetSequence() << endl;
         }
 
-        static Sequence * ParseToSequence(char * Path)
+        static Sequence *ParseToSequence(char *Path)
         {
-            string name, temp, filename, genome;
+            string name, temp, filename, genotype;
             std::ifstream file (Path);
             if (file.is_open()) {
                 if(file.good()) getline(file, name);
                 filename = name.substr(name.find("gb|") + 3, 6);
                 while (file.good()) {
                     getline(file, temp);
-                    genome += temp;
+                    genotype += temp;
                 }
             }
-            return new Sequence(name, genome, filename);
+            return new Sequence(name, genotype, filename);
         }
 };
 
