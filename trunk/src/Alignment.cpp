@@ -108,12 +108,12 @@ int Alignment::Align(string A, string B)
             --j;
         }
     }
-    while (i > 0) {
+    while (i >= 0) {
         alignment_a = A[i] + alignment_a;
         alignment_b = "-" + alignment_b;
         --i;
     }
-    while (j > 0) {
+    while (j >= 0) {
         alignment_a = "-" + alignment_a;
         alignment_b = B[j] + alignment_b;
         --j;
@@ -121,6 +121,7 @@ int Alignment::Align(string A, string B)
 
     cout << alignment_a << endl;
     cout << alignment_b << endl;
+	return 0; //What should this method return?
 }
 
 int main () {
