@@ -73,10 +73,3 @@ string Sequence::GetFilename()
 {
     return filename;
 }
-
-/**
- *  @brief Testing Method
- *  Tests that the Parser and Sequence
- *  classes work together well.
- *  TODO: Allow to parse through multiple Sequences
- */
