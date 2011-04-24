@@ -77,7 +77,7 @@ int Scoring::GetMatrixValue(char ACGT)
     else if (ACGT == 'C') return 1;
     else if (ACGT == 'G') return 2;
     else if (ACGT == 'T') return 3;
-    else if (ACGT == '-') return -1;
+    else return -1;
 }
 
 void Scoring::PrintMatrix()
@@ -92,7 +92,7 @@ void Scoring::PrintMatrix()
 
 /**
  * Takes an alginment in, passes its sequences to scorestrings, then sets
- * the alignment's score.  OBJECTS FUCKING IN A PARK, ON A HOBO, IN JUNE.
+ * the alignment's score.
  * @param align_in Alignment
  */
 void Scoring::ScoreStrings(Alignment &align_in)
@@ -103,30 +103,20 @@ void Scoring::ScoreStrings(Alignment &align_in)
 
 /**
  * Compares to strings and returns a score
+ * Both strings HAVE to be the same length
  */
 int Scoring::ScoreStrings(string a, string b)
 {
-    int short_length, long_length, i;
+    int length;
     int total = 0;
 
-    if(a.length() > b.length()) {
-        short_length = b.length();
-        long_length = a.length();
-    }
-    else {
-        short_length = a.length();
-        long_length = b.length();
-    }
+    if(a.length() != b.length())
+        return -1;
+    length = a.length();
 
-    for(i = 0; i < short_length; i++) {
+    for(int i = 0; i < length; i++) {
         total += Score(a.at(i), b.at(i));
     }
-/*
-    while(i < long_length) {
-        total -= 5;
-        i++;
-    }
-*/
 
     return total;
 }
