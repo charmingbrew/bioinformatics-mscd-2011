@@ -50,6 +50,7 @@ class Writer
         {
             ofstream align_out;
 
+            /* TODO store the output filepath in an alignment so we can skip the following line */
             align_out.open((name += ".txt").c_str());
             align_out << align_in.GetSeqA().GetName() << endl;
             align_out << align_in.GetSeqA().GetId() << endl;

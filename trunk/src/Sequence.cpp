@@ -29,10 +29,10 @@ Sequence::Sequence(string name, string genotype)
 }
 
 /**
- *  Constructor that initializes all three fields.
+ *  Constructor that initializes three fields.
  *  @param name The name of the sequence
  *  @param genotype The sequence of the genotype
- *  @param filename The output file name
+ *  @param file_path The output file name
  */
 Sequence::Sequence(string name, string genotype, string file_path)
 {
@@ -41,6 +41,13 @@ Sequence::Sequence(string name, string genotype, string file_path)
     SetFilePath(file_path);
 }
 
+/**
+ *  Constructor that initializes all 4 fields.
+ *  @param name The name of the file the sequence came from
+ *  @param id The sequence identification line from the fasta file
+ *  @param genotype The gene sequence
+ *  @param file_path The output path of the file
+ */
 Sequence::Sequence(string name, string id, string genotype, string file_path)
 {
     SetName(name);
