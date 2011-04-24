@@ -60,7 +60,7 @@ void Alignment::NWAlign()
 	string B = SeqB.GetSequence();
 
 	Scoring *scoring = new Scoring();
-	int penalty = -5;
+	int penalty = scoring->GetPenalty();
 	vector< vector<int> > AlignmentMatrix;
 
 	/* Create Needleman-Wunsch Alignment Matrix */
@@ -86,7 +86,7 @@ void Alignment::NWAlign()
         cout << endl;
     }
 	#endif
-    
+
     string alignment_a = "";
     string alignment_b = "";
     int i = A.length()-1;
@@ -137,8 +137,29 @@ void Alignment::NWAlign()
 	this->isAligned = true;
 }
 
-int main () {
-	Alignment a = Alignment(Sequence("HIVA", "CTAGCAGAAGAAGAAGTAGTAATCAGATCTGAAAATTTCACGAATAATGCTAAAATCATAATAGTACACCTGAATAAAACTGTAAATATTACTTGTACAAGACCCAACAACAATACAAGAAGAAGTATACCTATGGGACC"), Sequence("HIVB", "CTAGCAGAAGGAGAGGTAATAATTAGATCTGAAAATTTCACGGATAATGCTAAGACCATAATAGTACAGCTGAATGCAACTATAAACATTATTTGTGAAAGACCCCACAACAATACAAGAAAAAGTATACATATAGGACC"));
-	a.NWAlign();
-    return 0;
+/**
+ *  Thing
+ */
+Sequence Alignment::GetSeqA()
+{
+    return SeqA;
+}
+Sequence Alignment::GetSeqB()
+{
+    return SeqB;
+}
+
+bool Alignment::IsAligned()
+{
+    return isAligned;
+}
+
+void Alignment::SetScore(int score_in)
+{
+    this->score = score_in;
+}
+
+int Alignment::GetScore()
+{
+    return score;
 }

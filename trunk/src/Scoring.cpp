@@ -42,6 +42,7 @@ Scoring::Scoring()
     scoreMatrix[3][1] = -3;
     scoreMatrix[3][2] = 0;
     scoreMatrix[3][3] = 8;
+    penalty = -5;
 }
 
 /**
@@ -53,6 +54,8 @@ Scoring::Scoring()
  */
 int Scoring::Score(char a, char b)
 {
+    if(GetMatrixValue(a) == -1 || GetMatrixValue(b) == -1)
+        return penalty;
     return scoreMatrix[GetMatrixValue(a)][GetMatrixValue(b)];
 }
 
@@ -74,6 +77,7 @@ int Scoring::GetMatrixValue(char ACGT)
     else if (ACGT == 'C') return 1;
     else if (ACGT == 'G') return 2;
     else if (ACGT == 'T') return 3;
+    else if (ACGT == '-') return -1;
 }
 
 void Scoring::PrintMatrix()
@@ -86,6 +90,20 @@ void Scoring::PrintMatrix()
     }
 }
 
+/**
+ * Takes an alginment in, passes its sequences to scorestrings, then sets
+ * the alignment's score.  OBJECTS FUCKING IN A PARK, ON A HOBO, IN JUNE.
+ * @param align_in Alignment
+ */
+void Scoring::ScoreStrings(Alignment align_in)
+{
+   align_in.SetScore(Scoring::ScoreStrings(align_in.GetSeqA().GetAlignedSequence().GetAlignedGenotype(),
+                                            align_in.GetSeqB().GetAlignedSequence().GetAlignedGenotype()));
+}
+
+/**
+ * Compares to strings and returns a score
+ */
 int Scoring::ScoreStrings(string a, string b)
 {
     int short_length, long_length, i;
@@ -103,10 +121,17 @@ int Scoring::ScoreStrings(string a, string b)
     for(i = 0; i < short_length; i++) {
         total += Score(a.at(i), b.at(i));
     }
+/*
     while(i < long_length) {
         total -= 5;
         i++;
     }
+*/
 
     return total;
+}
+
+int Scoring::GetPenalty()
+{
+    return penalty;
 }

@@ -57,6 +57,13 @@ class Writer
             toaster.close();
         }
 
+/*
+        static void FileWrite(Alignment align_in)
+        {
+            ofstream align_out;
+            align_out.open()
+        }
+*/
         /**
          *  A public static method that takes in a pointer to the result object
          *  and writes the result to a file.
