@@ -17,7 +17,7 @@ class Scoring
         int GetMatrixValue(char ACGT);
         void PrintMatrix();
         int ScoreStrings(string a, string b);
-        void ScoreStrings(Alignment align_in);
+        void ScoreStrings(Alignment &align_in);
         int GetPenalty();
 };
 

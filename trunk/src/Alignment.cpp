@@ -22,12 +22,13 @@
 #include <iostream>
 using namespace std;
 
-#define debug
+//#define debug
 
 Alignment::Alignment(Sequence A, Sequence B)
 {
 	this->SeqA = A;
 	this->SeqB = B;
+	this->score = 0;
 }
 
 /**
@@ -161,5 +162,5 @@ void Alignment::SetScore(int score_in)
 
 int Alignment::GetScore()
 {
-    return score;
+    return this->score;
 }

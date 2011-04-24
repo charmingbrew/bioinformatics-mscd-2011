@@ -95,7 +95,7 @@ void Scoring::PrintMatrix()
  * the alignment's score.  OBJECTS FUCKING IN A PARK, ON A HOBO, IN JUNE.
  * @param align_in Alignment
  */
-void Scoring::ScoreStrings(Alignment align_in)
+void Scoring::ScoreStrings(Alignment &align_in)
 {
    align_in.SetScore(Scoring::ScoreStrings(align_in.GetSeqA().GetAlignedSequence().GetAlignedGenotype(),
                                             align_in.GetSeqB().GetAlignedSequence().GetAlignedGenotype()));

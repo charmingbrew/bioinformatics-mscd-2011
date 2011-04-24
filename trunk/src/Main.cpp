@@ -12,7 +12,6 @@ int main(void)
     //string filename;
     Sequence *seq1,  *seq2;
     Scoring *score = new Scoring();
-    Sequence *seq;
 
     std::cout << "Sequence 1) Enter name of file or path to file: ";
     std::cin >> path1;
@@ -26,7 +25,6 @@ int main(void)
 
     score->ScoreStrings(*phil);
     cout << "Score: " << phil->GetScore() << endl;
-    cout << "hotdog" << endl;
 
     seq_score = score->ScoreStrings(seq1->GetSequence(), seq2->GetSequence());
     std::cout << "Score of two sequences: " << seq_score << endl;
@@ -36,8 +34,6 @@ int main(void)
 
     std::cout << "press something then press enter" << endl;
     std::cin >> path1;
-
-    Writer::FileWrite(*seq);
 
     return 0;
 }
