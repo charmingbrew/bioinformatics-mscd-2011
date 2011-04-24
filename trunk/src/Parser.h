@@ -16,19 +16,35 @@ class Parser
             cout << seq.GetName() << endl << seq.GetSequence() << endl;
         }
 
-        static Sequence *ParseToSequence(char *Path)
+        static Sequence *ParseToSequence(string path)
         {
-            string name, temp, filename, genotype;
-            std::ifstream file (Path);
+            string name, temp, genotype, id;
+            ifstream file (path.c_str());
+            int i, j;
+
+            i = j = 0;
+
+            i = path.find(".fasta");
+            j = i;
+            while(path.at(j) != '\\' && path.at(j) != '/' && j > 0)
+                j--;
+            if(j > 0)
+                name = path.substr(j + 1, i - j);
+            else
+                name = path.substr(j, i);
+
+            /* path is changed to the ouput file's path */
+            path = path.substr(0, i);
+            path += ".txt";
+
             if (file.is_open()) {
-                if(file.good()) getline(file, name);
-                filename = name.substr(name.find("gb|") + 3, 6);
+                if(file.good()) getline(file, id);
                 while (file.good()) {
                     getline(file, temp);
                     genotype += temp;
                 }
             }
-            return new Sequence(name, genotype, filename);
+            return new Sequence(name, id, genotype, path);
         }
 };
 
