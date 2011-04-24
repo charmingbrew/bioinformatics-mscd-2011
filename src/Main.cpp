@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "Parser.h"
 #include "Writer.h"
 #include "Scoring.h"
@@ -6,15 +7,15 @@
 
 int main(void)
 {
-    char path1[256], path2[256];
+    string path1, path2;
     Alignment *phil;
     Sequence *seq1,  *seq2;
     Scoring *score = new Scoring();
 
     std::cout << "Sequence 1) Enter name of file or path to file: ";
-    std::cin >> path1;
+    std::getline(std::cin, path1);
     std::cout << "Sequence 2) Enter name of file or path to file: ";
-    std::cin >> path2;
+    std::getline(std::cin, path2);
 
     seq1 = Parser::ParseToSequence(path1);
     seq2 = Parser::ParseToSequence(path2);

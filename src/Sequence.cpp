@@ -41,6 +41,14 @@ Sequence::Sequence(string name, string genotype, string file_path)
     SetFilePath(file_path);
 }
 
+Sequence::Sequence(string name, string id, string genotype, string file_path)
+{
+    SetName(name);
+    SetId(id);
+    SetSequence(genotype);
+    SetFilePath(file_path);
+}
+
 void Sequence::SetSequence(string genotype)
 {
     this->genotype = genotype;
@@ -68,6 +76,16 @@ void Sequence::SetFilePath(string file_path)
 string Sequence::GetFilePath()
 {
     return file_path;
+}
+
+void Sequence::SetId(string id_in)
+{
+    this->id = id_in;
+}
+
+string Sequence::GetId()
+{
+    return id;
 }
 
 AlignedSequence &Sequence::GetAlignedSequence()

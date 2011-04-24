@@ -31,18 +31,6 @@ class Writer
             return gene;
         }
     public:
-
-       /**
-        *  A public static method that takes in a pointer to the alignment object
-        *  and writes the alignment to a file.
-        *  @param File A pointer to the deisired file name
-        *  @param alignment A pointer to the aligned genotypes
-        */
-        static void FileWrite(Alignment alignment)
-        {
-
-        }
-
          /**
          *  A public static method that takes in a pointer to the sequence object
          *  and writes the sequence to a file.
@@ -51,8 +39,8 @@ class Writer
         static void FileWrite(Sequence sequence)
         {
             ofstream toaster;
-            toaster.open ((sequence.GetFilePath()+=".txt").c_str());
-            toaster << sequence.GetName() << endl;
+            toaster.open (sequence.GetFilePath().c_str());
+            toaster << sequence.GetId() << endl;
             toaster << GeneFormat(sequence.GetSequence()) << endl;
             toaster.close();
         }
@@ -64,9 +52,13 @@ class Writer
 
             align_out.open((name += ".txt").c_str());
             align_out << align_in.GetSeqA().GetName() << endl;
-            align_out << GeneFormat(align_in.GetSeqA().GetSequence()) << endl << endl;
+            align_out << align_in.GetSeqA().GetId() << endl;
+            align_out << GeneFormat(align_in.GetSeqA().GetAlignedSequence().GetAlignedGenotype())
+                        << endl << endl;
             align_out << align_in.GetSeqB().GetName() << endl;
-            align_out << GeneFormat(align_in.GetSeqB().GetSequence()) << endl << endl;
+            align_out << align_in.GetSeqB().GetId() << endl;
+            align_out << GeneFormat(align_in.GetSeqB().GetAlignedSequence().GetAlignedGenotype())
+                        << endl << endl;
             align_out << "Score: " << align_in.GetScore() << endl;
             align_out.close();
         }
