@@ -8,6 +8,12 @@ using std::string;
 
 class Sequence {
 	private:
+        /**
+         * file_path after parsing stores the output path ../folder/filename.txt
+         * name stores the actual name of the file (the file.fasta without the .fasta)
+         * genotype stores the gene sequence
+         * id stores the first line of the fasta file (numerical id and other info)
+         */
         string file_path;
         string name;
 		string genotype;
