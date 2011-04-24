@@ -12,14 +12,19 @@ class Alignment
 		Sequence SeqA;
 		Sequence SeqB;
 		bool isAligned;
+		int score;
 	public:
 		string ToString(void);
 		Alignment(Sequence A, Sequence B);
 		void NWAlign();
-		
+		Sequence GetSeqA();
+		Sequence GetSeqB();
+		bool IsAligned();
+		void SetScore(int score_in);
+		int GetScore();
+
 };
 
 int MaxScore(int match, int deleted, int insert);
-void Align(string A, string B);
 
 #endif /* _ALIGNMENT_H */

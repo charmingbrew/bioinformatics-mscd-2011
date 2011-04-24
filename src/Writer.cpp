@@ -25,9 +25,6 @@ int main (void)
     Sequence *whale = new Sequence(a, b);
 
     cout << whale->GetName() << endl;
-
-    Writer::FileWrite(*whale);
-
     return 0;
 };
 */
