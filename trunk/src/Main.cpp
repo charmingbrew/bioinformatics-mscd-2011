@@ -7,9 +7,7 @@
 int main(void)
 {
     char path1[256], path2[256];
-    int seq_score;
     Alignment *phil;
-    //string filename;
     Sequence *seq1,  *seq2;
     Scoring *score = new Scoring();
 
@@ -26,11 +24,9 @@ int main(void)
     score->ScoreStrings(*phil);
     cout << "Score: " << phil->GetScore() << endl;
 
-    seq_score = score->ScoreStrings(seq1->GetSequence(), seq2->GetSequence());
-    std::cout << "Score of two sequences: " << seq_score << endl;
-
     Writer::FileWrite(*seq1);
     Writer::FileWrite(*seq2);
+    Writer::FileWrite(*phil, "test");
 
     std::cout << "press something then press enter" << endl;
     std::cin >> path1;

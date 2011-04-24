@@ -57,32 +57,19 @@ class Writer
             toaster.close();
         }
 
-/*
-        static void FileWrite(Alignment align_in)
+
+        static void FileWrite(Alignment align_in, string name)
         {
             ofstream align_out;
-            align_out.open()
-        }
-*/
-        /**
-         *  A public static method that takes in a pointer to the result object
-         *  and writes the result to a file.
-         *  @param File A pointer to the desired file name
-         *  @param result A pointer to the result from the aligned genotypes
-         */
 
-        /**
-        static void Writer::AlignWrite(string *File, Result *result)
-        {
-            FILE *pFile;
-            FILE *rFile;
-            pFile = fopen("something.fasta", "wb");
-            rFile = fopen("result.txt", "wb");
-            fwrite(result, 1, sizeof(result), rFile);
-            fclose(pFile);
-            fclose(rFile);
+            align_out.open((name += ".txt").c_str());
+            align_out << align_in.GetSeqA().GetName() << endl;
+            align_out << GeneFormat(align_in.GetSeqA().GetSequence()) << endl << endl;
+            align_out << align_in.GetSeqB().GetName() << endl;
+            align_out << GeneFormat(align_in.GetSeqB().GetSequence()) << endl << endl;
+            align_out << "Score: " << align_in.GetScore() << endl;
+            align_out.close();
         }
-        */
 };
 
 #endif // _WRITER_H

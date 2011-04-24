@@ -14,8 +14,8 @@ class Alignment
 		bool isAligned;
 		int score;
 	public:
+        Alignment(Sequence A, Sequence B);
 		string ToString(void);
-		Alignment(Sequence A, Sequence B);
 		void NWAlign();
 		Sequence GetSeqA();
 		Sequence GetSeqB();

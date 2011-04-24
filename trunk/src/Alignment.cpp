@@ -40,15 +40,10 @@ Alignment::Alignment(Sequence A, Sequence B)
  */
 int MaxScore(int match, int deleted, int insert)
 {
-    if (match > deleted) {
-        if (match > insert)
-            return match;
-        return insert;
-    } else if (deleted > match) {
-        if (deleted > insert)
-            return deleted;
-        return insert;
-    }
+    if (match > deleted)
+        return match > insert ? match : insert;
+    else if (deleted > match)
+        return deleted > insert ? deleted : insert;
 }
 
 /**
