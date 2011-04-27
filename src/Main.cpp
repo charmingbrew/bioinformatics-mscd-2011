@@ -20,7 +20,8 @@ int main(void)
     seq1 = Parser::ParseToSequence(path1);
     seq2 = Parser::ParseToSequence(path2);
     phil = new Alignment(*seq1, *seq2);
-    phil->NWAlign();
+    //phil->NWAlign();
+    phil->SWAlign();
 
     score->ScoreStrings(*phil);
     cout << "Score: " << phil->GetScore() << endl;

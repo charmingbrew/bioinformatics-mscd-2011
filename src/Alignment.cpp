@@ -16,7 +16,7 @@
  */
 
 #include "Alignment.h"
-#include "Scoring.h"
+//#include "Scoring.h"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -46,20 +46,15 @@ int MaxScore(int match, int deleted, int insert)
         return deleted > insert ? deleted : insert;
 }
 
-/**
- *  Beginning stub for the alignment method.
- *  @todo Matches up Alignments into AlignedSequence A and B
- */
-void Alignment::NWAlign()
+void Alignment::MatrixSpawner()
 {
-	string A = SeqA.GetSequence();
-	string B = SeqB.GetSequence();
+    A = SeqA.GetSequence();
+	B = SeqB.GetSequence();
 
 	Scoring *scoring = new Scoring();
-	int penalty = scoring->GetPenalty();
-	vector< vector<int> > AlignmentMatrix;
+	penalty = scoring->GetPenalty();
+    vector< vector<int> > AlignmentMatrix;
 
-	/* Create Needleman-Wunsch Alignment Matrix */
     AlignmentMatrix.resize(A.length(), vector<int>(B.length()) );
     for (int a = 0; a < A.length(); a++)
         AlignmentMatrix[a][0] = penalty * a;
@@ -73,6 +68,16 @@ void Alignment::NWAlign()
             AlignmentMatrix[i][j] = MaxScore(match, deleted, insert);
         }
     }
+}
+
+/**
+ *  Beginning stub for the alignment method.
+ *  @todo Matches up Alignments into AlignedSequence A and B
+ */
+void Alignment::NWAlign()
+{
+
+	MatrixSpawner();
 
 	#ifdef debug
     for(int k = 0; k < A.length(); k++) {
@@ -131,6 +136,90 @@ void Alignment::NWAlign()
 	SeqB.GetAlignedSequence().SetAlignedGenotype(alignment_b);
 
 	this->isAligned = true;
+}
+
+void Alignment::SWAlign()
+{
+    string A = SeqA.GetSequence();
+	string B = SeqB.GetSequence();
+
+	Scoring *scoring = new Scoring();
+	int penalty = scoring->GetPenalty();
+	vector< vector<int> > AlignmentMatrix;
+
+	MatrixSpawner();
+
+	#ifdef debug
+    for(int k = 0; k < A.length(); k++) {
+        for (int l = 0; l < B.length(); l++) {
+            cout << AlignmentMatrix[k][l] << " ";
+        }
+        cout << endl;
+    }
+	#endif
+
+	// search H for the maximal score
+    double H_max = 0.;
+    int i_max=0,j_max=0;
+    for(int i=1;i<=A.length();i++){
+        for(int j=1;j<=B.length();j++){
+            if(AlignmentMatrix[i][j]>H_max){
+                H_max = AlignmentMatrix[i][j];
+                i_max = i;
+                j_max = j;
+            }
+        }
+    }
+
+    string alignment_a = "";
+    string alignment_b = "";
+    int i = A.length()-1;
+    int j = B.length()-1;
+    while ((i_max > i || j_max > j) && AlignmentMatrix[i][j] != 0) {
+        int score = AlignmentMatrix[i_max][j_max];
+        int score_diag = AlignmentMatrix[i - 1][j - 1];
+        int score_up = AlignmentMatrix[i][j-1];
+        int score_left = AlignmentMatrix[i-1][j];
+        if (score == score_diag + scoring->Score(A[i], B[j])) {
+            alignment_a = A[i] + alignment_a;
+            alignment_b = B[j] + alignment_b;
+            i--;
+            j--;
+        } else if (score == score_left + penalty) {
+            alignment_a = A[i] + alignment_a;
+            alignment_b = "-" + alignment_b;
+            i--;
+        } else if (score == score_up + penalty) {
+            alignment_a = "-" + alignment_a;
+            alignment_b = B[j] + alignment_b;
+            j--;
+        }
+    }
+    while (i > 0) {
+		alignment_a = A[i] + alignment_a;
+        alignment_b = "-" + alignment_b;
+        i--;
+    }
+    while (j > 0) {
+        alignment_a = "-" + alignment_a;
+        alignment_b = B[j] + alignment_b;
+        j--;
+    }
+	if (i == 0 && j == 0)
+	{
+		alignment_a = A[0] + alignment_a;
+		alignment_b = B[0] + alignment_b;
+	}
+
+	#ifdef debug
+    cout << alignment_a << endl << alignment_b <<endl;
+	#endif
+
+	SeqA.GetAlignedSequence().SetAlignedGenotype(alignment_a);
+	SeqB.GetAlignedSequence().SetAlignedGenotype(alignment_b);
+
+	this->isAligned = true;
+
 }
 
 /**

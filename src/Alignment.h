@@ -2,6 +2,7 @@
 #define _ALIGNMENT_H
 
 #include "Sequence.h"
+#include "Scoring.h"
 #include <vector>
 #include <string>
 using namespace std;
@@ -13,6 +14,7 @@ class Alignment
 		Sequence SeqB;
 		bool isAligned;
 		int score;
+
 	public:
         Alignment(Sequence A, Sequence B);
 		string ToString(void);
@@ -22,6 +24,14 @@ class Alignment
 		bool IsAligned();
 		void SetScore(int score_in);
 		int GetScore();
+		void SWAlign();
+		void MatrixSpawner();
+        string A;
+        string B;
+
+        Scoring *scoring;
+        int penalty;
+        vector< vector<int> > AlignmentMatrix;
 
 };
 
