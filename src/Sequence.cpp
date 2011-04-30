@@ -8,7 +8,6 @@
 #include "Sequence.h"
 #include "Parser.h"
 #include "Alignment.h"
-#include "AlignedSequence.h"
 
 using std::string;
 using std::cout;
@@ -93,9 +92,4 @@ void Sequence::SetId(string id_in)
 string Sequence::GetId()
 {
     return id;
-}
-
-AlignedSequence &Sequence::GetAlignedSequence()
-{
-	return this->aligned_sequence;
 }

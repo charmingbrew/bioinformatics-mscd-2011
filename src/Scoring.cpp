@@ -7,24 +7,7 @@
 
 using namespace std;
 
-/**
- * Constructor that allows different scores for score matrix.
- *
- */
-Scoring::Scoring(int match, int miss)
-{
-    for (int i = 0; i < 4; i++) {
-        for(int j = 0; j < 4; j++ ) {
-            if(i == j) scoreMatrix[i][j] = match;
-            else scoreMatrix[i][j] = miss;
-        }
-    }
-}
-
-/**
- * Default constructor
- */
-Scoring::Scoring()
+void Scoring::GetDefaultMatrix(int scoreMatrix[4][4])
 {
     scoreMatrix[0][0] = 10;
     scoreMatrix[0][1] = -1;
@@ -42,7 +25,11 @@ Scoring::Scoring()
     scoreMatrix[3][1] = -3;
     scoreMatrix[3][2] = 0;
     scoreMatrix[3][3] = 8;
-    penalty = -5;
+}
+
+void Scoring::GetDefaultPenalty(int *penalty)
+{
+	*penalty = -5;
 }
 
 /**
@@ -52,7 +39,7 @@ Scoring::Scoring()
  * TODO: Reimplement for chars only so the Alignment class can
  *      use to create pairs.
  */
-int Scoring::Score(char a, char b)
+int Scoring::Score(char a, char b, int scoreMatrix[4][4], int penalty)
 {
     if(GetMatrixValue(a) == -1 || GetMatrixValue(b) == -1)
         return penalty;
@@ -80,7 +67,7 @@ int Scoring::GetMatrixValue(char ACGT)
     else return -1;
 }
 
-void Scoring::PrintMatrix()
+void Scoring::PrintMatrix(int scoreMatrix[4][4])
 {
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
@@ -91,21 +78,10 @@ void Scoring::PrintMatrix()
 }
 
 /**
- * Takes an alginment in, passes its sequences to scorestrings, then sets
- * the alignment's score.
- * @param align_in Alignment
- */
-void Scoring::ScoreStrings(Alignment &align_in)
-{
-   align_in.SetScore(Scoring::ScoreStrings(align_in.GetSeqA().GetAlignedSequence().GetAlignedGenotype(),
-                                            align_in.GetSeqB().GetAlignedSequence().GetAlignedGenotype()));
-}
-
-/**
  * Compares to strings and returns a score
  * Both strings HAVE to be the same length
  */
-int Scoring::ScoreStrings(string a, string b)
+int Scoring::ScoreStrings(string a, string b, int scoreMatrix[4][4], int penalty)
 {
     int length;
     int total = 0;
@@ -115,13 +91,8 @@ int Scoring::ScoreStrings(string a, string b)
     length = a.length();
 
     for(int i = 0; i < length; i++) {
-        total += Score(a.at(i), b.at(i));
+        total += Score(a.at(i), b.at(i), scoreMatrix, penalty);
     }
 
     return total;
-}
-
-int Scoring::GetPenalty()
-{
-    return penalty;
 }
