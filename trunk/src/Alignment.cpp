@@ -5,7 +5,8 @@
  *          Scoring class and find the most absolute
  *          path through that Matrix to create the best
  *          match possible.
- *          Thank you Needleman-Wunsch for your great work:
+ *
+ *          Needleman-Wunsch algorithm adapted from:
  *          <http://en.wikipedia.org/wiki/Needleman-Wunsch_algorithm>
  *  @see    Scoring.cpp
  *  @author Tony Do,
@@ -16,7 +17,7 @@
  */
 
 #include "Alignment.h"
-//#include "Scoring.h"
+#include "Scoring.h"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -46,28 +47,24 @@ int MaxScore(int match, int deleted, int insert)
         return deleted > insert ? deleted : insert;
 }
 
-void Alignment::MatrixSpawner()
+vector<vector<int>> Alignment::BuildMatrix(string A, string B)
 {
-    A = SeqA.GetSequence();
-	B = SeqB.GetSequence();
-
-	Scoring *scoring = new Scoring();
-	penalty = scoring->GetPenalty();
-    vector< vector<int> > AlignmentMatrix;
-
-    AlignmentMatrix.resize(A.length(), vector<int>(B.length()) );
+    vector<vector<int>> AlignmentMatrix;
+	AlignmentMatrix.resize(A.length(), vector<int>(B.length()) );
     for (int a = 0; a < A.length(); a++)
         AlignmentMatrix[a][0] = penalty * a;
     for (int b = 0; b < B.length(); b++)
         AlignmentMatrix[0][b] = penalty * b;
     for (int i = 1; i < A.length(); i++) {
         for (int j = 1; j < B.length(); j++) {
-            int match = AlignmentMatrix[i-1][j-1] + scoring->Score(A[i],B[j]);
+            int match = AlignmentMatrix[i-1][j-1] + Scoring::Score(A[i],B[j], scoreMatrix, penalty);
             int deleted = AlignmentMatrix[i-1][j] + penalty;
             int insert = AlignmentMatrix[i][j-1] + penalty;
             AlignmentMatrix[i][j] = MaxScore(match, deleted, insert);
         }
     }
+
+	return AlignmentMatrix;
 }
 
 /**
@@ -76,8 +73,14 @@ void Alignment::MatrixSpawner()
  */
 void Alignment::NWAlign()
 {
+	string A = SeqA.GetSequence();
+	string B = SeqB.GetSequence();
 
-	MatrixSpawner();
+	Scoring::GetDefaultMatrix(scoreMatrix);
+	Scoring::GetDefaultPenalty(&penalty);
+
+	/* Create Needleman-Wunsch Alignment Matrix */
+	vector<vector<int>> AlignmentMatrix = BuildMatrix(A, B);
 
 	#ifdef debug
     for(int k = 0; k < A.length(); k++) {
@@ -97,7 +100,7 @@ void Alignment::NWAlign()
         int score_diag = AlignmentMatrix[i - 1][j - 1];
         int score_up = AlignmentMatrix[i][j-1];
         int score_left = AlignmentMatrix[i-1][j];
-        if (score == score_diag + scoring->Score(A[i], B[j])) {
+        if (score == score_diag + Scoring::Score(A[i], B[j], scoreMatrix, penalty)) {
             alignment_a = A[i] + alignment_a;
             alignment_b = B[j] + alignment_b;
             i--;
@@ -132,8 +135,10 @@ void Alignment::NWAlign()
     cout << alignment_a << endl << alignment_b <<endl;
 	#endif
 
-	SeqA.GetAlignedSequence().SetAlignedGenotype(alignment_a);
-	SeqB.GetAlignedSequence().SetAlignedGenotype(alignment_b);
+	AlignedA.SetAlignedGenotype(alignment_a);
+	AlignedB.SetAlignedGenotype(alignment_b);
+
+	this->score = Scoring::ScoreStrings(AlignedA.GetAlignedGenotype(), AlignedB.GetAlignedGenotype(), scoreMatrix, penalty);
 
 	this->isAligned = true;
 }
@@ -143,11 +148,10 @@ void Alignment::SWAlign()
     string A = SeqA.GetSequence();
 	string B = SeqB.GetSequence();
 
-	Scoring *scoring = new Scoring();
-	int penalty = scoring->GetPenalty();
-	vector< vector<int> > AlignmentMatrix;
+	Scoring::GetDefaultMatrix(scoreMatrix);
+	Scoring::GetDefaultPenalty(&penalty);
 
-	MatrixSpawner();
+	vector<vector<int>> AlignmentMatrix = BuildMatrix(A, B);
 
 	#ifdef debug
     for(int k = 0; k < A.length(); k++) {
@@ -180,7 +184,7 @@ void Alignment::SWAlign()
         int score_diag = AlignmentMatrix[i - 1][j - 1];
         int score_up = AlignmentMatrix[i][j-1];
         int score_left = AlignmentMatrix[i-1][j];
-        if (score == score_diag + scoring->Score(A[i], B[j])) {
+        if (score == score_diag + Scoring::Score(A[i], B[j], scoreMatrix, penalty)) {
             alignment_a = A[i] + alignment_a;
             alignment_b = B[j] + alignment_b;
             i--;
@@ -215,15 +219,15 @@ void Alignment::SWAlign()
     cout << alignment_a << endl << alignment_b <<endl;
 	#endif
 
-	SeqA.GetAlignedSequence().SetAlignedGenotype(alignment_a);
-	SeqB.GetAlignedSequence().SetAlignedGenotype(alignment_b);
+	AlignedA.SetAlignedGenotype(alignment_a);
+	AlignedB.SetAlignedGenotype(alignment_b);
 
 	this->isAligned = true;
 
 }
 
 /**
- *  Thing
+ *  Sequence Accessors
  */
 Sequence Alignment::GetSeqA()
 {
@@ -234,14 +238,18 @@ Sequence Alignment::GetSeqB()
     return SeqB;
 }
 
+AlignedSequence Alignment::GetAlignedA()
+{
+	return this->AlignedA;
+}
+AlignedSequence Alignment::GetAlignedB()
+{
+	return this->AlignedB;
+}
+
 bool Alignment::IsAligned()
 {
     return isAligned;
-}
-
-void Alignment::SetScore(int score_in)
-{
-    this->score = score_in;
 }
 
 int Alignment::GetScore()

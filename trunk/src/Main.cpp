@@ -23,7 +23,6 @@ int main(void)
     //phil->NWAlign();
     phil->SWAlign();
 
-    score->ScoreStrings(*phil);
     cout << "Score: " << phil->GetScore() << endl;
 
     Writer::FileWrite(*seq1);

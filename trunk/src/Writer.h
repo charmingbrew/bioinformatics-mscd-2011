@@ -54,11 +54,11 @@ class Writer
             align_out.open((name += ".txt").c_str());
             align_out << align_in.GetSeqA().GetName() << endl;
             align_out << align_in.GetSeqA().GetId() << endl;
-            align_out << GeneFormat(align_in.GetSeqA().GetAlignedSequence().GetAlignedGenotype())
+            align_out << GeneFormat(align_in.GetAlignedA().GetAlignedGenotype())
                         << endl << endl;
             align_out << align_in.GetSeqB().GetName() << endl;
             align_out << align_in.GetSeqB().GetId() << endl;
-            align_out << GeneFormat(align_in.GetSeqB().GetAlignedSequence().GetAlignedGenotype())
+            align_out << GeneFormat(align_in.GetAlignedB().GetAlignedGenotype())
                         << endl << endl;
             align_out << "Score: " << align_in.GetScore() << endl;
             align_out.close();
