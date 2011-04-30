@@ -10,7 +10,6 @@ int main(void)
     string path1, path2;
     Alignment *phil;
     Sequence *seq1,  *seq2;
-    Scoring *score = new Scoring();
 
     std::cout << "Sequence 1) Enter name of file or path to file: ";
     std::getline(std::cin, path1);

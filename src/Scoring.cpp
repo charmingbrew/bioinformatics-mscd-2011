@@ -27,9 +27,21 @@ void Scoring::GetDefaultMatrix(int scoreMatrix[4][4])
     scoreMatrix[3][3] = 8;
 }
 
-void Scoring::GetDefaultPenalty(int *penalty)
+void Scoring::GetSWMatrix(int scoreMatrix[4][4])
 {
-	*penalty = -5;
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < 4; j++) {
+            if(i = j)
+                scoreMatrix[i][j] = 2;
+            else
+                scoreMatrix[i][j] = -1;
+        }
+    }
+}
+
+void Scoring::GetDefaultPenalty(int &penalty)
+{
+	penalty = -5;
 }
 
 /**
