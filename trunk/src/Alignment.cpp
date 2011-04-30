@@ -47,9 +47,9 @@ int MaxScore(int match, int deleted, int insert)
         return deleted > insert ? deleted : insert;
 }
 
-vector<vector<int>> Alignment::BuildMatrix(string A, string B)
+vector< vector<int> > Alignment::BuildMatrix(string A, string B)
 {
-    vector<vector<int>> AlignmentMatrix;
+    vector< vector<int> > AlignmentMatrix;
 	AlignmentMatrix.resize(A.length(), vector<int>(B.length()) );
     for (int a = 0; a < A.length(); a++)
         AlignmentMatrix[a][0] = penalty * a;
@@ -77,10 +77,10 @@ void Alignment::NWAlign()
 	string B = SeqB.GetSequence();
 
 	Scoring::GetDefaultMatrix(scoreMatrix);
-	Scoring::GetDefaultPenalty(&penalty);
+	Scoring::GetDefaultPenalty(penalty);
 
 	/* Create Needleman-Wunsch Alignment Matrix */
-	vector<vector<int>> AlignmentMatrix = BuildMatrix(A, B);
+	vector< vector<int> > AlignmentMatrix = BuildMatrix(A, B);
 
 	#ifdef debug
     for(int k = 0; k < A.length(); k++) {
@@ -148,10 +148,10 @@ void Alignment::SWAlign()
     string A = SeqA.GetSequence();
 	string B = SeqB.GetSequence();
 
-	Scoring::GetDefaultMatrix(scoreMatrix);
-	Scoring::GetDefaultPenalty(&penalty);
+	Scoring::GetSWMatrix(scoreMatrix);
+	Scoring::GetDefaultPenalty(penalty);
 
-	vector<vector<int>> AlignmentMatrix = BuildMatrix(A, B);
+	vector< vector<int> > AlignmentMatrix = BuildMatrix(A, B);
 
 	#ifdef debug
     for(int k = 0; k < A.length(); k++) {
@@ -165,8 +165,8 @@ void Alignment::SWAlign()
 	// search H for the maximal score
     double H_max = 0.;
     int i_max=0,j_max=0;
-    for(int i=1;i<=A.length();i++){
-        for(int j=1;j<=B.length();j++){
+    for(int i=1;i<A.length();i++){
+        for(int j=1;j<B.length();j++){
             if(AlignmentMatrix[i][j]>H_max){
                 H_max = AlignmentMatrix[i][j];
                 i_max = i;
@@ -221,6 +221,8 @@ void Alignment::SWAlign()
 
 	AlignedA.SetAlignedGenotype(alignment_a);
 	AlignedB.SetAlignedGenotype(alignment_b);
+
+	this->score = Scoring::ScoreStrings(AlignedA.GetAlignedGenotype(), AlignedB.GetAlignedGenotype(), scoreMatrix, penalty);
 
 	this->isAligned = true;
 
