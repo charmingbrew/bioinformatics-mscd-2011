@@ -27,7 +27,8 @@ class Alignment
         Alignment(Sequence A, Sequence B);
 		string ToString(void);
 
-		vector< vector<int> > BuildMatrix(string A, string B);
+		vector< vector<int> > BuildNWMatrix(string A, string B);
+		vector< vector<int> > BuildSWMatrix(string A, string B, vector< vector<int> > &iBacktrace, vector< vector<int> > &jBacktrace);
 		void NWAlign();
 		void SWAlign();
 
