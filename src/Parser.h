@@ -6,6 +6,9 @@
 #include <string>
 #include "Parser.h"
 #include "Sequence.h"
+#include "dirent.h"
+#include <vector>
+
 using namespace std;
 
 class Parser
@@ -15,6 +18,38 @@ class Parser
         {
             cout << seq.GetName() << endl << seq.GetSequence() << endl;
         }
+
+        static void ReadFromFolder(string path, vector<Sequence *> &seqvector)
+        {
+            DIR *dir;
+            struct dirent *ent;
+            string temp;
+
+            if(path.compare("local") == 0) {
+                path.resize(1);
+                path.replace(0, 1, ".");
+            }
+
+            if(path.at(path.length() - 1) != '/' && path.at(path.length() - 1) != '\\')
+                path += '/';
+
+            dir = opendir(path.c_str());
+
+            if(dir != NULL) {
+                while((ent = readdir(dir)) != NULL) {
+                    temp = ent->d_name;
+                    if(temp.find(".fasta") == temp.length() - 6) {
+                        seqvector.push_back(ParseToSequence(path + ent->d_name));
+                    }
+                }
+                closedir(dir);
+            }
+            else {
+                // couldn't open directory
+                perror("Couldn't open directory");
+            }
+        }
+
 
         /**
          *  Parse a fasta file to a sequence
