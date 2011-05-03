@@ -92,8 +92,8 @@ vector< vector<int> > Alignment::BuildSWMatrix(string A, string B, vector< vecto
 		for(int j = 1; j <= B.length(); j++)
 		{
 			temp[0] = AlignmentMatrix[i - 1][j - 1] + Scoring::Score(A[i - 1], B[j - 1], scoreMatrix, penalty);
-			temp[1] = AlignmentMatrix[i - 1][j] - penalty;                  
-			temp[2] = AlignmentMatrix[i][j - 1] - penalty;                 
+			temp[1] = AlignmentMatrix[i - 1][j] + penalty;                  
+			temp[2] = AlignmentMatrix[i][j - 1] + penalty;                 
 			temp[3] = 0;
 
 			/* Find the max value */
@@ -105,6 +105,7 @@ vector< vector<int> > Alignment::BuildSWMatrix(string A, string B, vector< vecto
 				if(temp[i] > max)
 				{
 					max = temp[i];
+					ind = i;
 				}
 			}
 			
@@ -221,6 +222,15 @@ void Alignment::SWAlign()
 	vector< vector<int> > iBacktrace;
 	vector< vector<int> > jBacktrace;
 	vector< vector<int> > AlignmentMatrix = BuildSWMatrix(A, B, iBacktrace, jBacktrace);
+
+	/*#ifdef debug
+    for(int k = 0; k < A.length(); k++) {
+        for (int l = 0; l < B.length(); l++) {
+            cout << AlignmentMatrix[k][l] << " ";
+        }
+        cout << endl;
+    }
+	#endif*/
 
 	// search H for the maximal score
     double H_max = 0.;
