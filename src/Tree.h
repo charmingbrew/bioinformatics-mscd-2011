@@ -1,10 +1,20 @@
+#ifndef _TREE_H
+#define _TREE_H
+
 #include "Node.h"
+#include "Alignment.h"
+#include "Tub.h"
 
 class Tree
 {
     private:
-        Node *root;
+        vector<Node *> *roots;
+        string ToNewick(Node *n);
+        string ToNewick(Node *n, string s);
     public:
         Tree();
-        void AddNode(Node &node_in);
+        void Add(Tub *t);
+        string ToNewick();
 };
+
+#endif // _TREE_H
