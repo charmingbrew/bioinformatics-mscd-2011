@@ -1,21 +1,3 @@
-/**
- *  @file   Alignment.cpp
- *  @brief  A class for aligning Sequences
- *          Class creates a Matrix based on the
- *          Scoring class and find the most absolute
- *          path through that Matrix to create the best
- *          match possible.
- *
- *          Needleman-Wunsch algorithm adapted from:
- *          <http://en.wikipedia.org/wiki/Needleman-Wunsch_algorithm>
- *  @see    Scoring.cpp
- *  @author Tony Do,
- *          Dane Elshof,
- *          Jonathan Nicholson,
- *          Dan Thode
- *  @date   20 April 2011
- */
-
 #include "Alignment.h"
 #include "Scoring.h"
 #include <string>
@@ -23,7 +5,7 @@
 #include <iostream>
 using namespace std;
 
-#define debug
+//#define debug
 
 Alignment::Alignment(Sequence A, Sequence B)
 {
@@ -32,13 +14,6 @@ Alignment::Alignment(Sequence A, Sequence B)
 	this->score = 0;
 }
 
-/**
- *  Compares the three integers and returns the largest.
- *  @param match A direct match up with a letter.
- *  @param deleted Top string is alligned with a gap
- *  @param insert Bottom string is aligned with a gap
- *  @return the higest score of the three in an alignment matrix.
- */
 int MaxScore(int match, int deleted, int insert)
 {
     if (match > deleted)
@@ -92,8 +67,8 @@ vector< vector<int> > Alignment::BuildSWMatrix(string A, string B, vector< vecto
 		for(int j = 1; j <= B.length(); j++)
 		{
 			temp[0] = AlignmentMatrix[i - 1][j - 1] + Scoring::Score(A[i - 1], B[j - 1], scoreMatrix, penalty);
-			temp[1] = AlignmentMatrix[i - 1][j] + penalty;                  
-			temp[2] = AlignmentMatrix[i][j - 1] + penalty;                 
+			temp[1] = AlignmentMatrix[i - 1][j] + penalty;
+			temp[2] = AlignmentMatrix[i][j - 1] + penalty;
 			temp[3] = 0;
 
 			/* Find the max value */
@@ -108,7 +83,7 @@ vector< vector<int> > Alignment::BuildSWMatrix(string A, string B, vector< vecto
 					ind = i;
 				}
 			}
-			
+
 			AlignmentMatrix[i][j] = max;
 
 			switch(ind){
@@ -126,7 +101,7 @@ vector< vector<int> > Alignment::BuildSWMatrix(string A, string B, vector< vecto
 					break;
 				case 3:                                  // (i,j) is the beginning of a subsequence
 					iBacktrace[i][j] = i;
-					jBacktrace[i][j] = j;	
+					jBacktrace[i][j] = j;
 					break;
 			}
 		}
@@ -135,10 +110,6 @@ vector< vector<int> > Alignment::BuildSWMatrix(string A, string B, vector< vecto
 	return AlignmentMatrix;
 }
 
-/**
- *  Beginning stub for the alignment method.
- *  @todo Matches up Alignments into AlignedSequence A and B
- */
 void Alignment::NWAlign()
 {
 	string A = SeqA.GetSequence();
@@ -294,9 +265,6 @@ void Alignment::SWAlign()
 
 }
 
-/**
- *  Sequence Accessors
- */
 Sequence Alignment::GetSeqA()
 {
     return SeqA;
