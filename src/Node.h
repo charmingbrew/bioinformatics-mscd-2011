@@ -1,5 +1,8 @@
 #include "Alignment.h"
 
+#ifndef _NODE_H
+#define _NODE_H
+
 class Node
 {
     private:
@@ -17,3 +20,5 @@ class Node
         void SetRightNode(Node &node_in);
         void SetLeftNode(Node &node_in);
 };
+
+#endif
