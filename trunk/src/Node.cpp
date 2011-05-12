@@ -2,52 +2,84 @@
 
 Node::Node()
 {
-    left = right = NULL;
-    nodeleft = noderight = NULL;
+    this->left = new Direction();
+    this->right = new Direction();
+    this->ID = -1;
 }
 
-Node::Node(Alignment &one, Alignment &two)
+Node::Node(Sequence *s, int ID)
 {
-    left = &one;
-    right = &two;
+    this->left = new Direction();
+    this->right = new Direction(s);
+    this->ID = ID;
 }
 
-Alignment *Node::GetLeftAlign()
+Node::Node(Node *l, Node *r)
 {
-    return left;
+    this->ID = l->GetID();
+    this->left = new Direction(l);
+    this->right = new Direction(r);
 }
 
-Alignment *Node::GetRightAlign()
+bool Node::isAlignment()
 {
-    return right;
+    return (!right->isOpen() && !left->isOpen());
 }
 
-void Node::SetLeftAlign(Alignment &align_in)
+Node::Node(Sequence *a, Sequence *b, int ID)
 {
-    left = &align_in;
+    this->ID = ID;
+    this->left = new Direction(a);
+    this->right = new Direction(b);
 }
 
-void Node::SetRightAlign(Alignment &align_in)
-{
-    right = &align_in;
-}
 
 Node *Node::GetLeftNode()
 {
-    return nodeleft;
+    return this->GetNode(this->left);
 }
 
 Node *Node::GetRightNode()
 {
-    return noderight;
+    return this->GetNode(this->right);
 }
 
-void Node::SetRightNode(Node &node_in)
+Node *Node::GetNode(Direction *d)
 {
-    noderight = &node_in;
+    return d->GetNode();
 }
 
-void Node::SetLeftNode(Node &node_in)
+void Node::SetLeftSequence(Sequence *seq)
 {
-    nodeleft = &node_in;
+    this->SetSequence(this->left, seq);
+}
+
+void Node::SetRightSequence(Sequence *seq)
+{
+    this->SetSequence(this->right, seq);
+}
+
+void Node::SetSequence(Direction *d, Sequence *s)
+{
+    d->SetSequence(s);
+}
+
+void Node::SetLeft(Node *node)
+{
+    this->SetNode(this->left, node);
+}
+
+void Node::SetRight(Node *node)
+{
+    this->SetNode(this->right, node);
+}
+
+void Node::SetNode(Direction *d, Node *n)
+{
+    d->SetNext(n);
+}
+
+int Node::GetID()
+{
+    return this->ID;
 }

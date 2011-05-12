@@ -1,5 +1,5 @@
 /**
- *  @file Sequence.cpp
+ *  @file   Sequence.cpp
  *
  */
 #include <string>
