@@ -1,11 +1,3 @@
-/**
- *  @file   Direction.cpp
- *  @brief  Directions in a guide tree node.
- *          A direction can only have a
- *          Sequence or a next Direction only.
- *  @see    Node.cpp
- */
-
 #include "Direction.h"
 #include "Sequence.h"
 #include "Node.h"
