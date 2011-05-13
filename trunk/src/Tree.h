@@ -25,9 +25,9 @@
 class Tree
 {
     private:
-        vector<Node *> *roots;
+        vector<Node *> roots;
         string ToNewick(Node *n);
-        string ToNewick(Node *n, string s);
+        string ToNewick(Node *n, string &s);
     public:
         /// Only Constructor, for control of inputs.
         Tree();

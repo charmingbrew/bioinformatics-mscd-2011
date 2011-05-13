@@ -1,3 +1,6 @@
+#ifndef _ALIGNMENT_H
+#define _ALIGNMENT_H
+
 /**
  *  @class  Alignment
  *  @brief  Class that controls Aligning Sequences.
@@ -13,16 +16,13 @@
 #include <string>
 using namespace std;
 
-#ifndef _ALIGNMENT_H
-#define _ALIGNMENT_H
-
 class Alignment
 {
 	private:
-		Sequence SeqA;
+		string SeqA;
 		AlignedSequence AlignedA;
 
-		Sequence SeqB;
+		string SeqB;
 		AlignedSequence AlignedB;
 
 		bool isAligned;
@@ -32,8 +32,9 @@ class Alignment
 		int penalty;
 		int scoreMatrix[4][4];
 	public:
+        Alignment();
         /// Constructor creates an alignment between A and B
-        Alignment(Sequence A, Sequence B);
+        Alignment(string A, string B);
 		string ToString(void);
 		vector< vector<int> > BuildNWMatrix(string A, string B);
 		vector< vector<int> > BuildSWMatrix(string A, string B, vector< vector<int> > &iBacktrace, vector< vector<int> > &jBacktrace);
@@ -46,8 +47,11 @@ class Alignment
 		 */
 		void SWAlign();
 
-		Sequence GetSeqA();
-		Sequence GetSeqB();
+		string GetSeqA();
+		string GetSeqB();
+
+		void SetSeqA(string seq_in);
+		void SetSeqB(string seq_in);
 
 		AlignedSequence GetAlignedA();
 		AlignedSequence GetAlignedB();
