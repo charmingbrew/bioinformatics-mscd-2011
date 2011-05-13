@@ -2,10 +2,11 @@
 #include "Sequence.h"
 #include <vector>
 #include <string>
+#include "Node.h"
 
 Tree::Tree()
 {
-    roots = new vector<Node *>();
+
 }
 
 /*
@@ -30,7 +31,7 @@ void Tree::Add(Tub *t)
      *  e.g. Seq A & Seq B become  Alignment AB
      */
     if(rootnumber < 0 ) {
-        roots->push_back(new Node(left, right, newnode));
+        roots.push_back(new Node(left, right, newnode));
     }
     /*
      *  IF Both Seq's are empty, that means two seperate alignments
@@ -40,12 +41,12 @@ void Tree::Add(Tub *t)
     else if(left == NULL && right == NULL) {
         Node *destination, *mover;
 
-        for(int i = 0; i < roots->size(); i++) {
+        for(int i = 0; i < roots.size(); i++) {
             if(newnode == roots[i]->GetID()) {
                 mover = roots[i];
-                roots->erase(roots.begin()+i);
+                roots.erase(roots.begin()+i);
             }
-            if(rootnumber == roots[i]->GetCompare()) {
+            if(rootnumber == roots[i]->GetID()) {
                 destination = roots[i];
             }
         }
@@ -60,10 +61,10 @@ void Tree::Add(Tub *t)
      *  e.g. Seq C & Align AB become ABC
      */
     else if(left == NULL && right != NULL) {
-        Node *destination;
+        Node *destination, *mover;
         Node *newseq = new Node(right, newnode);
-        for(int i = 0; i < roots->size(); i++) {
-            if(rootnumber == roots[i]->GetCompare()) {
+        for(int i = 0; i < roots.size(); i++) {
+            if(rootnumber == roots[i]->GetID()) {
                 destination = roots[i];
             }
         }
@@ -91,16 +92,16 @@ string Tree::ToNewick(Node *n, string &s)
     if(n->GetLeftSequence() == NULL) {
         s += ToNewick(n->GetLeftNode());
     }
-    else if(n->GetRightSequence() == NULL) {
-        s += "," ToNewick(n->GetRightNode());
+    else if(n->GetLeftSequence() == NULL) {
+        s += "," + ToNewick(n->GetRightNode());
     }
     else {
         if(n->GetLeftSequence() != NULL) {
             s +=  n->GetLeftSequence()->GetName();
         }
         if(n->GetRightSequence() != NULL) {
-            s += "," n->GetRightSequence()->GetName();
+            s += "," + n->GetRightSequence()->GetName();
         }
-        return s
+        return s;
     }
 }

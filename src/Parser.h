@@ -30,10 +30,10 @@ class Parser
                 path.replace(0, 1, ".");
             }
 
+            dir = opendir(path.c_str());
+
             if(path.at(path.length() - 1) != '/' && path.at(path.length() - 1) != '\\')
                 path += '/';
-
-            dir = opendir(path.c_str());
 
             if(dir != NULL) {
                 while((ent = readdir(dir)) != NULL) {

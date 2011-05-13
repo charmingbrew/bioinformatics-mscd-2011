@@ -6,6 +6,7 @@
 #include "Alignment.h"
 #include "Sequence.h"
 #include <limits>
+#include <vector>
 
 #define clear_cin std::cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
 
@@ -33,7 +34,7 @@ int main(void)
 
             seq1 = Parser::ParseToSequence(path1);
             seq2 = Parser::ParseToSequence(path2);
-            phil = new Alignment(*seq1, *seq2);
+            phil = new Alignment(seq1->GetSequence(), seq2->GetSequence());
             phil->NWAlign();
             //phil->SWAlign();
 
@@ -51,10 +52,8 @@ int main(void)
 
             Parser::ReadFromFolder(path1, seqvector);
 
-            /*
             for(int i = 0; i < seqvector.size(); i++)
                 Writer::FileWrite(*(seqvector[i]));
-            */
 
             keep_going = false;
         }

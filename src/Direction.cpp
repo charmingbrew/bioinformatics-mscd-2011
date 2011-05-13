@@ -40,3 +40,8 @@ bool Direction::isOpen()
 {
     return (this->next == NULL && this->seq == NULL);
 }
+
+Sequence *Direction::GetSequence()
+{
+    return this->seq;
+}

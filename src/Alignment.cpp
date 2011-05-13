@@ -7,7 +7,12 @@ using namespace std;
 
 //#define debug
 
-Alignment::Alignment(Sequence A, Sequence B)
+Alignment::Alignment()
+{
+    this->score = 0;
+}
+
+Alignment::Alignment(string A, string B)
 {
 	this->SeqA = A;
 	this->SeqB = B;
@@ -112,8 +117,8 @@ vector< vector<int> > Alignment::BuildSWMatrix(string A, string B, vector< vecto
 
 void Alignment::NWAlign()
 {
-	string A = SeqA.GetSequence();
-	string B = SeqB.GetSequence();
+	string A = SeqA;
+	string B = SeqB;
 
 	Scoring::GetDefaultMatrix(scoreMatrix);
 	Scoring::GetDefaultPenalty(penalty);
@@ -184,8 +189,8 @@ void Alignment::NWAlign()
 
 void Alignment::SWAlign()
 {
-    string A = SeqA.GetSequence();
-	string B = SeqB.GetSequence();
+    string A = SeqA;
+	string B = SeqB;
 
 	Scoring::GetSWMatrix(scoreMatrix);
 	penalty = -1;
@@ -265,11 +270,11 @@ void Alignment::SWAlign()
 
 }
 
-Sequence Alignment::GetSeqA()
+string Alignment::GetSeqA()
 {
     return SeqA;
 }
-Sequence Alignment::GetSeqB()
+string Alignment::GetSeqB()
 {
     return SeqB;
 }
@@ -291,4 +296,14 @@ bool Alignment::IsAligned()
 int Alignment::GetScore()
 {
     return this->score;
+}
+
+void Alignment::SetSeqA(string seq_in)
+{
+    this->SeqA = seq_in;
+}
+
+void Alignment::SetSeqB(string seq_in)
+{
+    this->SeqB = seq_in;
 }

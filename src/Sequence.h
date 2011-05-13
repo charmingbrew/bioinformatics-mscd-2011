@@ -2,6 +2,8 @@
 #define _SEQUENCE_H
 
 #include <string>
+#include <vector>
+#include "Alignment.h"
 
 using std::string;
 
