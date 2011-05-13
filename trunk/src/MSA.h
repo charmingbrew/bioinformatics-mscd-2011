@@ -6,15 +6,20 @@
 #include "Sequence.h"
 #include "Tub.h"
 #include "Tree.h"
+#include "Alignment.h"
 
-class MSA
+class MSA : public Alignment
 {
     private:
+        string newick;
         void AlignSeqs(vector<Tub *> &tubvector, bool align_new);
         void Qcalc(vector<Tub *> &tubvector, Tree *phytree, int id);
         void QtoTree(int atub, int btub, vector<Tub *> &tubvector, Tree *phytree, int id);
+        string GetMSA(Tree *phytree);
     public:
-        void NeighborJoin(vector<Sequence *> &seqvector, bool align_nw); // align_nw = true for NWAlign
+        MSA();
+        void NeighborJoin(vector<Sequence *> seqvector, bool align_nw); // align_nw = true for NWAlign
+        string GetNewick();
 };
 
 #endif

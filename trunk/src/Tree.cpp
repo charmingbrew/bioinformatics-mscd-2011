@@ -61,7 +61,7 @@ void Tree::Add(Tub *t)
      *  e.g. Seq C & Align AB become ABC
      */
     else if(left == NULL && right != NULL) {
-        Node *destination, *mover;
+        Node *destination;
         Node *newseq = new Node(right, newnode);
         for(int i = 0; i < roots.size(); i++) {
             if(rootnumber == roots[i]->GetID()) {
@@ -69,9 +69,9 @@ void Tree::Add(Tub *t)
             }
         }
         if(destination->isAlignment())
-            destination = new Node(destination, mover);
+            destination = new Node(destination, newseq);
         else
-            destination->SetRight(mover);
+            destination->SetRight(newseq);
     }
 }
 
@@ -102,6 +102,6 @@ string Tree::ToNewick(Node *n, string &s)
         if(n->GetRightSequence() != NULL) {
             s += "," + n->GetRightSequence()->GetName();
         }
-        return s;
     }
+    return s;
 }

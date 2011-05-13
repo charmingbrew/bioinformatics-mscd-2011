@@ -14,6 +14,7 @@ int main(void)
 {
     string path1, path2, choice;
     Alignment *phil;
+    MSA *stan;
     Sequence *seq1,  *seq2;
     vector<Sequence *> seqvector;
     bool keep_going = true;
@@ -51,9 +52,10 @@ int main(void)
             std::getline(std::cin, path1);
 
             Parser::ReadFromFolder(path1, seqvector);
+            stan = new MSA();
+            stan->NeighborJoin(seqvector, true);
 
-            for(int i = 0; i < seqvector.size(); i++)
-                Writer::FileWrite(*(seqvector[i]));
+            Writer::FileWrite(*stan);
 
             keep_going = false;
         }
