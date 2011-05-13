@@ -18,7 +18,7 @@ using namespace std;
 
 class Alignment
 {
-	private:
+	protected:
 		string SeqA;
 		AlignedSequence AlignedA;
 

@@ -5,14 +5,21 @@
 #include "Tree.h"
 #include "Alignment.h"
 
-void MSA::NeighborJoin(vector<Sequence *> &seqvector, bool align_nw)
+MSA::MSA()
+{
+    this->score = 0;
+}
+
+void MSA::NeighborJoin(vector<Sequence *> seqvector, bool align_nw)
 {
     vector<Tub *> tubvector;
+    Tub *temp;
     Tree *thetree = new Tree();
     int current_id = 1;
 
-    for(int i = 0; i < tubvector.size(); i++) {
-        tubvector[i] = new Tub(seqvector[i]);
+    for(int i = 0; i < seqvector.size(); i++) {
+        temp = new Tub(seqvector[i]);
+        tubvector.push_back(temp);
         tubvector[i]->SetVecPos(i);
     }
 
@@ -21,26 +28,28 @@ void MSA::NeighborJoin(vector<Sequence *> &seqvector, bool align_nw)
         Qcalc(tubvector, thetree, current_id);
         current_id++;
     }
+
+    this->newick = GetMSA(thetree);
+
 }
 
 void MSA::AlignSeqs(vector<Tub *> &tubvector, bool align_nw)
 {
     int seq_align_index;
-    Alignment *align = new Alignment();
 
     for(int i = 0; i < tubvector.size() - 1; i++) {
         if(tubvector[i]->HasLeft())
-            align->SetSeqA(tubvector[i]->GetLeftSeq()->GetSequence());
+            this->SetSeqA(tubvector[i]->GetLeftSeq()->GetSequence());
         seq_align_index = 0;
 
         for(int j = i + 1; j < tubvector.size(); j++) {
-            align->SetSeqB(tubvector[j]->GetLeftSeq()->GetSequence());
-            align_nw ? align->NWAlign() : align->SWAlign();
+            this->SetSeqB(tubvector[j]->GetLeftSeq()->GetSequence());
+            align_nw ? NWAlign() : SWAlign();
 
-            tubvector[i]->SetAlignScore(seq_align_index, align->GetScore());
+            tubvector[i]->SetAlignScore(seq_align_index, GetScore());
 
-            tubvector[i]->AddToMSA(align->GetScore());
-            tubvector[j]->AddToMSA(align->GetScore());
+            tubvector[i]->AddToMSA(GetScore());
+            tubvector[j]->AddToMSA(GetScore());
 
             seq_align_index++;
         }
@@ -97,6 +106,8 @@ void MSA::QtoTree(int atub, int btub, vector<Tub *> &tubvector, Tree *phytree, i
 
             phytree->Add(tubvector[btub]);
 
+            cout << "joined " << tubvector[atub]->GetID() << " : " << tubvector[btub]->GetID() << endl;
+
             delete tubvector[btub];
             tubvector.erase(tubvector.begin() + btub);
 
@@ -108,6 +119,8 @@ void MSA::QtoTree(int atub, int btub, vector<Tub *> &tubvector, Tree *phytree, i
             tubvector[atub]->SetCompare(tubvector[btub]->GetID());
 
             phytree->Add(tubvector[btub]);
+
+            cout << "joined " << tubvector[atub]->GetID() << " : " << tubvector[btub]->GetID() << endl;
 
             delete tubvector[atub];
             tubvector.erase(tubvector.begin() + atub);
@@ -122,6 +135,8 @@ void MSA::QtoTree(int atub, int btub, vector<Tub *> &tubvector, Tree *phytree, i
 
             phytree->Add(tubvector[btub]);
 
+            cout << "joined " << tubvector[atub]->GetID() << " : " << tubvector[btub]->GetID() << endl;
+
             delete tubvector[btub];
             tubvector.erase(tubvector.begin() + btub);
         }
@@ -130,8 +145,20 @@ void MSA::QtoTree(int atub, int btub, vector<Tub *> &tubvector, Tree *phytree, i
 
             phytree->Add(tubvector[atub]);
 
+            cout << "joined " << tubvector[atub]->GetID() << " : " << tubvector[btub]->GetID() << endl;
+
             delete tubvector[atub];
             tubvector.erase(tubvector.begin() + atub);
         }
     }
+}
+
+string MSA::GetMSA(Tree *phytree)
+{
+    return phytree->ToNewick();
+}
+
+string MSA::GetNewick()
+{
+    return this->newick;
 }

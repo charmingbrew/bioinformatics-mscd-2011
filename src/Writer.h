@@ -6,6 +6,7 @@
 #include <iostream>
 #include "Alignment.h"
 #include "Sequence.h"
+#include "MSA.h"
 
 class Writer
 {
@@ -62,6 +63,16 @@ class Writer
                         << endl << endl;
             align_out << "Score: " << align_in.GetScore() << endl;
             align_out.close();
+        }
+
+        static void FileWrite(MSA msa_in)
+        {
+            ofstream msa_out;
+
+            msa_out.open("MSA.txt");
+            msa_out << "Newick Format Multiple Sequence Alignment" << endl;
+            msa_out << msa_in.GetNewick();
+            msa_out.close();
         }
 };
 
