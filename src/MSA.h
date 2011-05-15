@@ -15,6 +15,7 @@ class MSA : public Alignment
         void AlignSeqs(vector<Tub *> &tubvector, bool align_new);
         void Qcalc(vector<Tub *> &tubvector, Tree *phytree, int id);
         void QtoTree(int atub, int btub, vector<Tub *> &tubvector, Tree *phytree, int id);
+        void AlignDCalc(vector<Tub *> &tubvector, int aindex, int bindex);
         string GetMSA(Tree *phytree);
     public:
         MSA();

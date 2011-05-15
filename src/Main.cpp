@@ -24,8 +24,9 @@ int main(void)
         std::cout << "a - enter a directory containing fasta files" << endl;
         std::cout << "e - exit" << endl;
         std::cout << "enter choice: ";
-        cin >> choice;
-        clear_cin;
+        //cin >> choice;
+        //clear_cin;
+        choice = "a";
 
         if(choice.compare("m") == 0) {
             std::cout << "Sequence 1) Enter name of file or path to file: ";
@@ -49,7 +50,8 @@ int main(void)
         }
         else if(choice.compare("a") == 0) {
             std::cout << "Enter folder path to fasta files, or local for local fasta files: ";
-            std::getline(std::cin, path1);
+            //std::getline(std::cin, path1);
+            path1 = "local";
 
             Parser::ReadFromFolder(path1, seqvector);
             stan = new MSA();

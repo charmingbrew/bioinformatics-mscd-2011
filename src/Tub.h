@@ -9,6 +9,9 @@ class Tub
     private:
         int self_id, compare_id, vector_pos;
         Sequence *left, *right;
+        // old scores hold the previous dmatrix lists of the seqs/aligns current represented by the tub
+        vector<double> old_scores_a;
+        vector<double> old_scores_b;
         vector<double> align_scores;
         vector<double> q_scores;
         double msa_score;
@@ -44,6 +47,12 @@ class Tub
         bool HasLeft();
         bool HasRight();
         bool HasBoth();
+
+        void SetOldA(Tub *tub_in);
+        void SetOldB(Tub *tub_in);
+        double GetOldA(int index);
+        double GetOldB(int index);
+        void Combine(Tub *tub_in, int pos);
 };
 
 #endif

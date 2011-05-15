@@ -30,7 +30,8 @@ class Parser
                 path.replace(0, 1, ".");
             }
 
-            dir = opendir(path.c_str());
+            //dir = opendir(path.c_str());
+            dir = opendir("/home/two/stuff/Code Blocks Projects/BioInfo/bin/Debug/");
 
             if(path.at(path.length() - 1) != '/' && path.at(path.length() - 1) != '\\')
                 path += '/';
