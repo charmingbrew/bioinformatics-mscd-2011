@@ -67,7 +67,12 @@ void Tub::FlipSeqs()
 
 void Tub::SetAlignScore(int index, double num_in)
 {
-    this->align_scores[index] = num_in;
+    if(this->align_scores.size() >= index)
+    {
+        align_scores.push_back(num_in);
+    }
+    else
+        this->align_scores[index] = num_in;
 }
 
 double Tub::GetAlignScore(int index)
@@ -82,7 +87,10 @@ int Tub::GetAlignScoreLength()
 
 void Tub::SetQScore(int index, double num_in)
 {
-    this->q_scores[index] = num_in;
+    if(this->q_scores.size() >= index)
+        q_scores.push_back(num_in);
+    else
+        this->q_scores[index] = num_in;
 }
 
 double Tub::GetQScore(int index)
@@ -123,4 +131,34 @@ bool Tub::HasRight()
 bool Tub::HasBoth()
 {
     return HasRight() && HasLeft();
+}
+
+void Tub::SetOldA(Tub *tub_in)
+{
+    this->old_scores_a = tub_in->align_scores;
+}
+
+void Tub::SetOldB(Tub *tub_in)
+{
+    this->old_scores_b = tub_in->align_scores;
+}
+
+double Tub::GetOldA(int index)
+{
+    return this->old_scores_a[index];
+}
+
+double Tub::GetOldB(int index)
+{
+    return this->old_scores_b[index];
+}
+
+void Tub::Combine(Tub *tub_in, int pos)
+{
+    tub_in->align_scores.erase(tub_in->align_scores.begin() + pos);
+    this->align_scores.erase(this->align_scores.begin() + pos);
+    this->SetOldA(this);
+    this->SetOldB(tub_in);
+    //this->old_scores_a.erase(old_scores_a.begin() + pos);
+    //this->old_scores_b.erase(old_scores_b.begin() + pos);
 }

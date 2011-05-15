@@ -60,7 +60,8 @@ void Sequence::SetSequence(string genotype)
     this->genotype = genotype;
 }
 
-string Sequence::GetSequence() {
+string Sequence::GetSequence()
+{
 	return genotype;
 }
 
