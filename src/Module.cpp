@@ -9,7 +9,7 @@ void Align(char* fasta_files[], int num_files, int algorithms, char* save_path)
         char* path;
         Sequence *seq1 = Parser::ParseToSequence(fasta_files[i]);
         Sequence *seq2 = Parser::ParseToSequence(fasta_files[i+1]);
-        Alignment *alignment = new Alignment(*seq1, *seq2);
+        Alignment *alignment = new Alignment(seq1->GetSequence(), seq2->GetSequence());
 
         if(algorithms == 1)
             alignment->NWAlign();
