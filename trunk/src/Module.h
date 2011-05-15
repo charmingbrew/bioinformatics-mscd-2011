@@ -4,11 +4,14 @@
 
 #include "AlignedSequence.h"
 #include "Alignment.h"
+#include "Direction.h"
+#include "MSA.h"
 #include "Node.h"
 #include "Parser.h"
 #include "Scoring.h"
 #include "Sequence.h"
 #include "Tree.h"
+#include "Tub.h"
 #include "Writer.h"
 
 class Module

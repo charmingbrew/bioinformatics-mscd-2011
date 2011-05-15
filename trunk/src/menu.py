@@ -1,13 +1,6 @@
 #!/usr/bin/env python
 import PieAlign
 
-choice = ""
-AlignAlgor = ""
-forward = False
-Smith = 0
-Needleman = 1
-AlgorChoice = 0
-
 def build_filelist(extension, path):
 	import os
 	import glob
@@ -21,54 +14,33 @@ def build_filelist(extension, path):
 		filelist.insert(0, cwd + "/" + f)
 		
 	return filelist
-	
-def result_append(filename, path):
-	return path + filename
 
-while choice != "quit":
-	print "Type \"input\" files or type \"quit\" to exit"
-	print
-	choice = raw_input("enter a choice: ")
+def get_algorithm():
+	algorithm_choice = 0
+	
+	while valid_algorithm(algorithm_choice) == False:
+		algorithm_choice = raw_input("Choose desired alignment algorithm: (n) Needleman-Wunsch, (s) Smith-Waterman: ")
+	return algorithm_choice.lower()
 
-	print "you've entered: ", choice
-	print
+def valid_algorithm(algorithm_string):
 	
-	if choice != "quit":
-		file1 = raw_input("Input file directory: ")
-		filelist = build_filelist("*.fasta", file1)
+	if algorithm_string == 'n' or algorithm_string == 'N':
+		return True
+	elif algorithm_string == 's' or algorithm_string == 'S':
+		return True
+	else:
+		return False
+
+while True:
+	filedir = raw_input("Type the input files directory or \"quit\" to exit: ")
 	
-		print
-		print "you've entered: ", file1
-		print
-		print "contents: ", filelist
-		print
+	if filedir != "quit":
+		filelist = build_filelist("*.fasta", filedir)
 		
-		while forward != True:
-			print "Enter desired algorithm: (\"S\" for: Smith Waterman) or (\"N\" for: Needleman Wunsch)"
-			AlignAlgor = raw_input("Enter your choice: ")
-			
-			if AlignAlgor == "S" or AlignAlgor == "s":
-				AlgorChoice = Smith
-				
-				print "you've entered: ", AlignAlgor
-				print
-				forward = True
-			elif AlignAlgor == "N" or AlignAlgor == "n":
-				AlgorChoice = Needleman
-				
-				print "you've entered: ", AlignAlgor
-				print
-				forward = True
-			else:
-				print
-				print "Invalid Choice: enter a valid choice \"S\" or \"N\""
-				print
+		algorithm = 0 if get_algorithm() == 's' else 1
 		
-		results = result_append("/results", file1)
-		PieAlign.Align(filelist, len(filelist), AlgorChoice, results)
+		results = filedir + "/results"
+		PieAlign.Align(filelist, len(filelist), algorithm, results)
 		
 	else:
-		print "...."
-		print "Thanks for using me, please use me again."
-		print
 		quit()
