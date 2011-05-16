@@ -10,7 +10,6 @@
 
 #include "Direction.h"
 #include "Sequence.h"
-#include "Node.h"
 
 Direction::Direction()
 {
@@ -40,7 +39,7 @@ void Direction::SetSequence(Sequence *seq)
     this->next = NULL;
 }
 
-void Direction::SetNext(Node *next)
+void Direction::SetNextNode(Node *next)
 {
     this->next = next;
     this->seq = NULL;
