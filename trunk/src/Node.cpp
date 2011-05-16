@@ -71,14 +71,18 @@ void Node::SetRightSequence(Sequence *seq)
 
 Sequence *Node::GetLeftSequence()
 {
-    return this->left->GetSequence();
+    return this->GetSequence(this->left);
 }
 
 Sequence *Node::GetRightSequence()
 {
-    return this->right->GetSequence();
+    return this->GetSequence(this->right);
 }
 
+Sequence *Node::GetSequence(Direction *d)
+{
+    return d->GetSequence();
+}
 void Node::SetSequence(Direction *d, Sequence *s)
 {
     d->SetSequence(s);
@@ -96,7 +100,7 @@ void Node::SetRight(Node *node)
 
 void Node::SetNode(Direction *d, Node *n)
 {
-    d->SetNext(n);
+    d->SetNextNode(n);
 }
 
 int Node::GetID()

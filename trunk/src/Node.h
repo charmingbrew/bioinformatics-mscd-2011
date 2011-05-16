@@ -20,7 +20,7 @@ class Node
         Direction *left, *right;
         int ID;
         void SetSequence(Direction *d, Sequence *seq);
-        Sequence * GetSequence(Direction *d, Sequence *seq);
+        Sequence * GetSequence(Direction *d);
         void SetNode(Direction *d, Node *n);
         Node *GetNode(Direction *d);
     public:

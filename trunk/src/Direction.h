@@ -1,5 +1,4 @@
 class Node;
-
 /**
  *  @class  Direction
  *  @brief  Directions in a guide tree node.
@@ -30,7 +29,7 @@ class Direction
 		Sequence *GetSequence();
 		void SetSequence(Sequence *s);
 		Node *GetNode();
-		void SetNext(Node *next);
+		void SetNextNode(Node *next);
 		void SetScore();
 		/// Checks for an empty Direction Object
 		bool isOpen();
