@@ -2,6 +2,7 @@
 #define _ALIGNMENT_H
 
 /**
+ *  @file   Alignment.h
  *  @class  Alignment
  *  @brief  Class that controls Aligning Sequences.
  *          Alignment glues together two Sequences

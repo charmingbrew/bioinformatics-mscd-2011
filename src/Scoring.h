@@ -1,6 +1,7 @@
 /**
- *	@file	Module.h
- *	@brief	
+ *	@file	Scoring.h
+ *  @class  Scoring
+ *	@brief	Static functions to score two sequences
  *	@author	Tony Do,
  *			Dane Elshof,
  *			Jonathan Nicholson,

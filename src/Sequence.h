@@ -1,6 +1,7 @@
 /**
- *	@file	Module.h
- *	@brief	
+ *	@file	Sequence.h
+ *  @class  Sequence
+ *	@brief	Stores a gene sequence, and its information
  *	@author	Tony Do,
  *			Dane Elshof,
  *			Jonathan Nicholson,

@@ -1,4 +1,5 @@
 /**
+ *  @file   Node.h
  *  @class  Node
  *  @brief  Node of a Phylogenetic Tree.
  *          This class handles all Node creation, Getters and Setters
