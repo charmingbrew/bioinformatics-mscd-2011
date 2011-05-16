@@ -1,6 +1,9 @@
+/* this is a module for the Module.h so that python can talk to it */
+
 %module PieAlign
 
 // This tells SWIG to treat char ** as a special case
+/* changes Python list to C string array */
 %typemap(in) char ** {
   /* Check if is a list */
   if (PyList_Check($input)) {
