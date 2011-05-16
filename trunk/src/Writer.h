@@ -1,6 +1,7 @@
 /**
- *	@file	Module.h
- *	@brief	
+ *	@file	Writer.h
+ *  @class  Writer
+ *	@brief	Handles all file output
  *	@author	Tony Do,
  *			Dane Elshof,
  *			Jonathan Nicholson,

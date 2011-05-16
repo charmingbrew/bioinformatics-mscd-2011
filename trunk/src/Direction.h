@@ -1,5 +1,6 @@
 class Node;
 /**
+ *  @file   Direction.h
  *  @class  Direction
  *  @brief  Directions in a guide tree node.
  *          A direction contains a direction (as in left

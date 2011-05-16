@@ -1,7 +1,3 @@
-/**
- *  @file   Sequence.cpp
- *
- */
 #include <string>
 #include <iostream>
 #include <fstream>

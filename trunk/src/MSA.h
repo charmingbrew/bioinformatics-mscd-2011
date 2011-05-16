@@ -1,6 +1,7 @@
 /**
  *	@file	MSA.h
- *	@brief	
+ *  @class  MSA
+ *	@brief	Handles multiple sequence alignment, creates phylogeny tree
  *	@author	Tony Do,
  *			Dane Elshof,
  *			Jonathan Nicholson,

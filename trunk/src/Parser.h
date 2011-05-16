@@ -1,5 +1,6 @@
 /**
  *	@file	Parser.h
+ *  @class  Parser
  *	@brief	A class that reads FASTA files
  *	@return	Sequences
  *	@author	Tony Do,

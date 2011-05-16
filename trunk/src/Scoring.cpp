@@ -1,6 +1,3 @@
-/**
- * @file Scoring.cpp
- */
 #include <iostream>
 #include <string>
 #include "Scoring.h"

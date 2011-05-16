@@ -1,6 +1,7 @@
 /**
- *	@file	Module.h
- *	@brief	
+ *	@file	Tub.h
+ *  @class  Tub
+ *	@brief	Tubs hold data for multiple sequence alignment
  *	@author	Tony Do,
  *			Dane Elshof,
  *			Jonathan Nicholson,

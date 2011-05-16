@@ -1,4 +1,5 @@
 /**
+ *  @file   AlignedSequence.h
  *  @class  AlignedSequence
  *  @brief  Holds a sequence string after it is aligned
  */
