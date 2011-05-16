@@ -113,11 +113,6 @@ double Tub::GetMSA()
     return this->msa_score;
 }
 
-void Tub::SetVecPos(int index)
-{
-    this->vector_pos = index;
-}
-
 bool Tub::HasLeft()
 {
     return this->GetLeftSeq() != NULL;

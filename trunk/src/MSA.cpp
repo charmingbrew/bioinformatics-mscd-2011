@@ -20,7 +20,6 @@ void MSA::NeighborJoin(vector<Sequence *> seqvector, bool align_nw)
     for(int i = 0; i < seqvector.size(); i++) {
         temp = new Tub(seqvector[i]);
         tubvector.push_back(temp);
-        tubvector[i]->SetVecPos(i);
     }
 
     while(tubvector.size() > 2) {

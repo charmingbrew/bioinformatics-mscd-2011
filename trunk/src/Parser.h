@@ -14,11 +14,20 @@ using namespace std;
 class Parser
 {
 	public:
+        /**
+         * Prints gene sequence from sequence file to standard out
+         * @param seq Sequence file to print from
+         */
         static void PrintFromSequence(Sequence &seq)
         {
             cout << seq.GetName() << endl << seq.GetSequence() << endl;
         }
 
+        /**
+         * Takes a folder path in and parses all fasta files in that folder to sequence files
+         * @param path Folder path stored in string
+         * @param seqvector Vector of sequence pointers
+         */
         static void ReadFromFolder(string path, vector<Sequence *> &seqvector)
         {
             DIR *dir;
@@ -54,6 +63,7 @@ class Parser
 
         /**
          *  Parse a fasta file to a sequence
+         *  @param path String path to file to parse from
          */
         static Sequence *ParseToSequence(string path)
         {
