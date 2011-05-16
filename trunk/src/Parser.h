@@ -1,3 +1,14 @@
+/**
+ *	@file	Parser.h
+ *	@brief	A class that reads FASTA files
+ *	@return	Sequences
+ *	@author	Tony Do,
+ *			Dane Elshof,
+ *			Jonathan Nicholson,
+ *			Dan Thode
+ *	@date	11. May 2011
+ */
+
 #ifndef _PARSER_H
 #define _PARSER_H
 

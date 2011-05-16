@@ -1,5 +1,18 @@
-#!/usr/bin/env python
+## @file setup.py
+
+## @brief	sets up the correct flags
+
+## @author	Tony Do,
+#			Dane Elshof,
+#			Jonathan Nicholson,
+#			Dan Thode
+
+## @date	11. May 2011
+ 
 import PieAlign
+from charList import *
+
+## gets all the FASTA files in the file
 
 def build_filelist(extension, path):
 	import os
@@ -30,6 +43,9 @@ def valid_algorithm(algorithm_string):
 		return True
 	else:
 		return False
+
+
+##	The menu choices
 
 while True:
 	filedir = raw_input("Type the input files directory or \"quit\" to exit: ")

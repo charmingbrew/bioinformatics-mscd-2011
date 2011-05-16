@@ -1,3 +1,13 @@
+/**
+ *	@file	MSA.h
+ *	@brief	
+ *	@author	Tony Do,
+ *			Dane Elshof,
+ *			Jonathan Nicholson,
+ *			Dan Thode
+ *	@date	11. May 2011
+ */
+
 #ifndef _MSA_H
 #define _MSA_H
 

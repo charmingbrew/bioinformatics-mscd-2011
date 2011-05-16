@@ -1,4 +1,14 @@
-#!/usr/bin/env python
+## @file setup.py
+
+## @brief	sets up the correct flags for SWIG
+
+## @author	Tony Do,
+#			Dane Elshof,
+#			Jonathan Nicholson,
+#			Dan Thode
+
+## @date	11. May 2011
+
 
 from distutils.core import setup, Extension
 
