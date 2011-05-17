@@ -9,7 +9,7 @@
 
 ## @date	11. May 2011
  
-import PieAlign
+#import PieAlign
 from charList import *
 
 ## gets all the FASTA files in the file
@@ -56,7 +56,7 @@ while True:
 		algorithm = 0 if get_algorithm() == 's' else 1
 		
 		results = filedir + "/results"
-		PieAlign.Align(filelist, len(filelist), algorithm, results)
+		#PieAlign.Align(filelist, len(filelist), algorithm, results)
 		
 	else:
 		quit()
