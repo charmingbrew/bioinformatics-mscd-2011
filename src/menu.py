@@ -9,8 +9,7 @@
 
 ## @date	11. May 2011
  
-#import PieAlign
-from charList import *
+import PieAlign
 
 ## gets all the FASTA files in the file
 
