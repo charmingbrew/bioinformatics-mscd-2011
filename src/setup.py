@@ -13,7 +13,7 @@
 from distutils.core import setup, Extension
 
 Module_module = Extension('_PieAlign',
-			   sources=['PieAlign_wrap.cxx', 'Module.cpp', 'AlignedSequence.cpp', 'Alignment.cpp', 'Node.cpp', 'Parser.cpp', 'Scoring.cpp', 'Sequence.cpp', 'Tree.cpp', 'Writer.cpp', 'Direction.cpp', 'Tub.cpp'],
+			   sources=['PieAlign_wrap.cxx', 'Module.cpp', 'AlignedSequence.cpp', 'Alignment.cpp', 'Node.cpp', 'Scoring.cpp', 'Sequence.cpp', 'Tree.cpp', 'Direction.cpp', 'Tub.cpp', 'MSA.cpp', 'MSAScores.cpp'],
 			  )
 
 setup (name = 'PieAlign',
