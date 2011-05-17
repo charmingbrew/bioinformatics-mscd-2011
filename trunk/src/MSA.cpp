@@ -225,7 +225,7 @@ int MSA::QtoTree(int atub, int btub, vector<Tub *> &tubvector, Tree *phytree, in
 
             RearrangeScoreMatrix(tubvector.size(), btub);
 
-            tubvector.erase(tubvector.begin() + btub - 1);
+            tubvector.erase(tubvector.begin() + (btub - 1));
             tubvector[atub]->SetOldPosA(atub);
             tubvector[atub]->SetOldPosB(tubvector.size());
 
