@@ -52,6 +52,7 @@ int main(void)
             std::cout << "Enter folder path to fasta files, or local for local fasta files: ";
             //std::getline(std::cin, path1);
             path1 = "local";
+            //path1 = "/home/two/stuff/Code Blocks Projects/BioInfo/bin/Debug/";
 
             Parser::ReadFromFolder(path1, seqvector);
             stan = new MSA();

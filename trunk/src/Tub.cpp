@@ -6,6 +6,7 @@ Tub::Tub(Sequence *seq_in)
     this->right = NULL;
     this->self_id = 0;
     this->compare_id = -1;
+    this->msa_score = 0;
 }
 
 Tub::~Tub()
@@ -65,42 +66,14 @@ void Tub::FlipSeqs()
     this->left = NULL;
 }
 
-void Tub::SetAlignScore(int index, double num_in)
-{
-    if(this->align_scores.size() >= index)
-    {
-        align_scores.push_back(num_in);
-    }
-    else
-        this->align_scores[index] = num_in;
-}
-
-double Tub::GetAlignScore(int index)
-{
-    return this->align_scores[index];
-}
-
-int Tub::GetAlignScoreLength()
-{
-    return this->align_scores.size();
-}
-
-void Tub::SetQScore(int index, double num_in)
-{
-    if(this->q_scores.size() >= index)
-        q_scores.push_back(num_in);
-    else
-        this->q_scores[index] = num_in;
-}
-
-double Tub::GetQScore(int index)
-{
-    return this->q_scores[index];
-}
-
 void Tub::AddToMSA(int add)
 {
     this->msa_score += add;
+}
+
+void Tub::SubtractFromMSA(double sub)
+{
+    this->msa_score -= sub;
 }
 
 void Tub::CalcMSA(int divisor)
@@ -128,32 +101,22 @@ bool Tub::HasBoth()
     return HasRight() && HasLeft();
 }
 
-void Tub::SetOldA(Tub *tub_in)
+int Tub::GetOldPosA()
 {
-    this->old_scores_a = tub_in->align_scores;
+    return this->old_pos_a;
 }
 
-void Tub::SetOldB(Tub *tub_in)
+void Tub::SetOldPosA(int pos)
 {
-    this->old_scores_b = tub_in->align_scores;
+    this->old_pos_a = pos;
 }
 
-double Tub::GetOldA(int index)
+int Tub::GetOldPosB()
 {
-    return this->old_scores_a[index];
+    return this->old_pos_b;
 }
 
-double Tub::GetOldB(int index)
+void Tub::SetOldPosB(int pos)
 {
-    return this->old_scores_b[index];
-}
-
-void Tub::Combine(Tub *tub_in, int pos)
-{
-    tub_in->align_scores.erase(tub_in->align_scores.begin() + pos);
-    this->align_scores.erase(this->align_scores.begin() + pos);
-    this->SetOldA(this);
-    this->SetOldB(tub_in);
-    //this->old_scores_a.erase(old_scores_a.begin() + pos);
-    //this->old_scores_b.erase(old_scores_b.begin() + pos);
+    this->old_pos_b = pos;
 }

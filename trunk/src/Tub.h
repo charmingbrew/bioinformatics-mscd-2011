@@ -18,13 +18,8 @@
 class Tub
 {
     private:
-        int self_id, compare_id;
+        int self_id, compare_id, old_pos_a, old_pos_b;
         Sequence *left, *right;
-        // old scores hold the previous dmatrix lists of the seqs/aligns current represented by the tub
-        vector<double> old_scores_a;
-        vector<double> old_scores_b;
-        vector<double> align_scores;
-        vector<double> q_scores;
         double msa_score;
     public:
         /**
@@ -84,38 +79,11 @@ class Tub
         void FlipSeqs();
 
         /**
-         * Adds/Sets an alignment score in a tub
-         * @param index Index in the alignment vector into which an alignment score is put
-         * @param num_in The value to be put into the alignment score
-         */
-        void SetAlignScore(int index, double num_in);
-        /**
-         * Returns an alignment score at the specified index
-         * @param index Index in the alignment scores vector
-         */
-        double GetAlignScore(int index);
-        /**
-         * Returns the length of the alignemtn scores vector in a tub
-         */
-        int GetAlignScoreLength();
-
-        /**
-         * Sets a Q score at the specified index in the q score vector
-         * @param index Index in the q score vector that the score will be put
-         * @param num_in Score to be put in the q score vector
-         */
-        void SetQScore(int index, double num_in);
-        /**
-         * Returns the q score at the specified index in the q score vector
-         * @param index Index of score in q score vector
-         */
-        double GetQScore(int index);
-
-        /**
          * Adds a number to the msa variable
          * @param add Number to add
          */
         void AddToMSA(int add);
+        void SubtractFromMSA(double sub);
         /**
          * Calculates the msa score of a tub
          * @param divisor Number of tubs left in tubvector
@@ -139,32 +107,10 @@ class Tub
          */
         bool HasBoth();
 
-        /**
-         * Copies the input tub's alignment scores vector to the tub's old alignment scores a vector
-         * @param tub_in Tub from which old alignment vector will be copied
-         */
-        void SetOldA(Tub *tub_in);
-        /**
-         * Copies the input tub's alignment scores vector to the tub's old alignment scores b vector
-         * @param tub_in Tub from which old alignment vector will be copied
-         */
-        void SetOldB(Tub *tub_in);
-        /**
-         * Returns the alignment score in a specific position in the old scores a vector
-         * @param index Index of the score to return
-         */
-        double GetOldA(int index);
-        /**
-         * Returns the alignment score in a specific position in the old scores b vector
-         * @param index Index of the score to return
-         */
-        double GetOldB(int index);
-        /**
-         * Combines two tubs data, used when two tubs have the closest distsance from the q matrix
-         * @param tub_in Tub that will be combined with the calling tub
-         * @param pos Position of the tub being removed from the tubvector, used to remove score from alignment vector
-         */
-        void Combine(Tub *tub_in, int pos);
+        int GetOldPosA();
+        void SetOldPosA(int pos);
+        int GetOldPosB();
+        void SetOldPosB(int pos);
 };
 
 #endif

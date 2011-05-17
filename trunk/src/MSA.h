@@ -18,24 +18,26 @@
 #include "Tub.h"
 #include "Tree.h"
 #include "Alignment.h"
+#include "MSAScores.h"
 
 class MSA : public Alignment
 {
     private:
         string newick;
+        vector< vector<MSAScores> > score_matrix;
         /**
          * Creates a distance matrix between tubs
          * @param tubvector Vector of tubs to build dmatrix from
          * @param align_nw Boolean flag for which alignment method to use
          */
-        void AlignSeqs(vector<Tub *> &tubvector, bool align_new);
+        void CreateD(vector<Tub *> &tubvector, bool align_new, int index);
         /**
          * Calculates Qscores for elements in the Dmatrix
          * @param tubvector Vector of tubs that creates the dmatrix
          * @param phytree The tree which is built from the q matrix
          * @param id The id that will be assigned to new alignments
          */
-        void Qcalc(vector<Tub *> &tubvector, Tree *phytree, int id);
+        int Qcalc(vector<Tub *> &tubvector, Tree *phytree, int id);
         /**
          * Using the Qmatrix a tub is added to the guide tree
          * @param atub Index in the tubvector of first tub
@@ -44,7 +46,7 @@ class MSA : public Alignment
          * @param phytree Tree created from the tubvector
          * @param id Id number of tub that is created
          */
-        void QtoTree(int atub, int btub, vector<Tub *> &tubvector, Tree *phytree, int id);
+        int QtoTree(int atub, int btub, vector<Tub *> &tubvector, Tree *phytree, int id);
         /**
          * Creates D score for two tubs which represent previous alignments
          * @param tubvector Vector of tubs to be used in creation of dmatrix
@@ -57,6 +59,7 @@ class MSA : public Alignment
          * @param phytree Phylogeny tree
          */
         string GetMSA(Tree *phytree);
+        void RearrangeScoreMatrix(int size, int index);
     public:
         /**
          * Default constructor initializes score to 0
