@@ -59,6 +59,11 @@ class MSA : public Alignment
          * @param phytree Phylogeny tree
          */
         string GetMSA(Tree *phytree);
+        /**
+         * Moves "deleted" rows to the outside of the matrix, shrinks all rows accordingly
+         * @param size Size of the rows
+         * @param index Index of row to remove
+         */
         void RearrangeScoreMatrix(int size, int index);
     public:
         /**

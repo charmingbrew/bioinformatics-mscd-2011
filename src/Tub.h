@@ -83,6 +83,10 @@ class Tub
          * @param add Number to add
          */
         void AddToMSA(int add);
+        /**
+         * Subtracts a number from the msa score
+         * @param sub Number to subtract
+         */
         void SubtractFromMSA(double sub);
         /**
          * Calculates the msa score of a tub
